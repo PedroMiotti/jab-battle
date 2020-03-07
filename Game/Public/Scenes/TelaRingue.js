@@ -31,7 +31,7 @@ class TelaRingue extends Phaser.Scene {
                 this.anims.create({
                     key: "idle",
                     repeat: -1,
-                    frameRate: 4,
+                    frameRate: 3,
                     frames: this.anims.generateFrameNames('Tommy', {
                         prefix: 'Tommy_',
                         suffix: ".png",
@@ -70,12 +70,35 @@ class TelaRingue extends Phaser.Scene {
                 })
 
 
+        // ADDING KEYS
+        // this.key = this.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S} )
+        this.keys = this.input.keyboard.createCursorKeys();
 
-        this.tommy.play('jab')
 
         // Escondendo a TextBox da Tela Nome
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
 
     }
+
+    update(){
+         // CHARACTER CONTROL
+            // TOMMY
+                this.movePlayers()
+
+            
+    }
+
+    // FUNCAO PARA MOVER OS JOGADORES
+        movePlayers(){
+            if(this.keys.left.isDown){
+                this.tommy.x += 5
+                this.tommy.play("walk")
+
+            }
+            else if(this.keys.right.isDown){
+                this.tommy.play("walk")
+                this.tommy.x -= 5
+            }
+        }
 }
