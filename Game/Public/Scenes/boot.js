@@ -30,8 +30,9 @@ class Boot extends Phaser.Scene {
             this.load.image('telaringueBG', 'Assets/img/TelaRingue.png')
 
             // Sprites
-            // Tommu
-            this.load.spritesheet('tommyIdle', 'Assets/Sprites/TommyIdle.png', 80, 111)
+                // Tommy
+                this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/sprites.png", 'Assets/Sprites/JSON/sprites.json')
+
     }
 
     create() {
@@ -40,7 +41,6 @@ class Boot extends Phaser.Scene {
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
 
-        this.add.text(20,20, 'Loading game...')
         this.scene.start('telaInicial')
 
     }
