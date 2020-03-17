@@ -4,12 +4,16 @@ class TelaRingue extends Phaser.Scene {
     }
 
     create(){
+
         // Setting Background
         this.background = this.add.image(0, 0, 'telaringueBG')
         this.background.setOrigin(0, 0)
 
         // Loading Characters 
-        this.tommy = this.add.sprite(300, 450,'Tommy', 'Tommy_01.png')
+        this.tommy = this.physics.add.sprite(300, 450,'Tommy', 'Tommy_01.png')
+
+        this.tommy.setCollideWorldBounds(true);
+        this.physics.add.collider(this.tommy);
 
         // ANIMATIONS
             // TOMMY
@@ -71,9 +75,8 @@ class TelaRingue extends Phaser.Scene {
 
 
         // ADDING KEYS
-        // this.key = this.input.keyboard.addKeys( { 'up': Phaser.KeyCode.W, 'down': Phaser.KeyCode.S} )
         this.keys = this.input.keyboard.createCursorKeys();
-
+        
 
         // Escondendo a TextBox da Tela Nome
         this.inputBox = document.getElementById('nameBox')
@@ -92,13 +95,14 @@ class TelaRingue extends Phaser.Scene {
     // FUNCAO PARA MOVER OS JOGADORES
         movePlayers(){
             if(this.keys.left.isDown){
-                this.tommy.x += 5
+                this.tommy.x -= 5
                 this.tommy.play("walk")
 
             }
             else if(this.keys.right.isDown){
                 this.tommy.play("walk")
-                this.tommy.x -= 5
+                this.tommy.x += 5
             }
+           
         }
 }
