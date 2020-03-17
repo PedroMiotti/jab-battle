@@ -7,12 +7,12 @@ Jogo criado para a aula de **Projetos Interdiciplinares 1** da faculdade ESPM co
 
 **Integrantes do grupo :**
 
-Pedro Miotti
-Thiago Miotti Arribamar
-Guilherme Frizo
-Pedro Pastelar
-Lucca Pascote
-Rafael Ruthledge
+Pedro Miotti,
+Thiago Miotti Arribamar,
+Guilherme Frizo,
+Pedro Pastelar,
+Lucca Pascote,
+Rafael Ruthledge,
 
 
 Para rodar o jogo em sua maquina :
