@@ -9,11 +9,13 @@ class TelaRingue extends Phaser.Scene {
         this.background = this.add.image(0, 0, 'telaringueBG')
         this.background.setOrigin(0, 0)
 
-        // Loading Characters 
+        // // Loading Characters 
         this.tommy = this.physics.add.sprite(300, 450,'Tommy', 'Tommy_01.png')
-
+        
+        // Adding physics to the character
         this.tommy.setCollideWorldBounds(true);
         this.physics.add.collider(this.tommy);
+        
 
         // ANIMATIONS
             // TOMMY
@@ -73,7 +75,7 @@ class TelaRingue extends Phaser.Scene {
                     })
                 })
 
-
+                
         // ADDING KEYS
         this.keys = this.input.keyboard.createCursorKeys();
         
@@ -81,6 +83,8 @@ class TelaRingue extends Phaser.Scene {
         // Escondendo a TextBox da Tela Nome
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
+
+        
 
     }
 
@@ -94,14 +98,30 @@ class TelaRingue extends Phaser.Scene {
 
     // FUNCAO PARA MOVER OS JOGADORES
         movePlayers(){
-            if(this.keys.left.isDown){
-                this.tommy.x -= 5
-                this.tommy.play("walk")
+            
 
+            if (this.keys.left.isDown)
+            {
+                this.tommy.setVelocityX(-160);
+
+                this.tommy.anims.play('walk', true);
             }
-            else if(this.keys.right.isDown){
-                this.tommy.play("walk")
-                this.tommy.x += 5
+            else if (this.keys.right.isDown)
+            {
+                this.tommy.setVelocityX(160);
+
+                this.tommy.anims.play('walk', true);
+            }
+            else
+            {
+                this.tommy.setVelocityX(0);
+
+                this.tommy.anims.play('idle');
+            }
+
+            if (this.keys.up.isDown && this.tommy.body.touching.down)
+            {
+                this.tommy.setVelocityY(-330);
             }
            
         }

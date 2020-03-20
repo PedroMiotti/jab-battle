@@ -32,7 +32,9 @@ class Boot extends Phaser.Scene {
             // Sprites
                 // Tommy
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/sprites.png", 'Assets/Sprites/JSON/sprites.json')
+                this.load.spritesheet("dude", "Assets/Characters/dude.png", { frameWidth: 32, frameHeight: 48 });
 
+                
     }
 
     create() {
