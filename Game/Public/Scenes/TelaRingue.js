@@ -103,14 +103,14 @@ class TelaRingue extends Phaser.Scene {
    
             if (this.keys.left.isDown){
 
-                this.tommy.anims.play('walk', true);
+                this.tommy.anims.play('walk', true)
                 this.tommy.setVelocityX(-160);
             }
 
             else if (this.keys.right.isDown){
 
                 this.tommy.setVelocityX(160);
-                this.tommy.anims.play('walk', true);
+                this.tommy.anims.play('walk', true)
 
             }
 
@@ -119,14 +119,14 @@ class TelaRingue extends Phaser.Scene {
             }
 
             else if (this.keys.direto.isDown){
-                this.tommy.anims.play('direto');
+                this.tommy.anims.play('direto')
 
             }
 
             else{
 
                 this.tommy.setVelocityX(0);
-                this.tommy.anims.play('idle');
+                this.tommy.anims.play('idle')
 
             }
 
