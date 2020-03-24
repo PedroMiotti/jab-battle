@@ -39,6 +39,9 @@ class Boot extends Phaser.Scene {
 
     create() {
 
+        //Socket.io
+        this.socket = io();
+
         // Escondendo a TextBox da Tela Nome
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
