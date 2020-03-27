@@ -39,9 +39,9 @@ class Boot extends Phaser.Scene {
 
     create() {
 
-        
-        
-        this.socket = io()
+        this.connectToSocket()
+        this.socketEvents()
+
         // Escondendo a TextBox da Tela Nome
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
@@ -49,5 +49,35 @@ class Boot extends Phaser.Scene {
         this.scene.start('telaInicial')
 
     }
+
+    // Funcao para connectar o client to the socket
+    connectToSocket(){
+        try{
+            this.socket = io()
+        }
+        catch(err){
+            console.log(err)
+        }
+
+    }
+
+    // Funcao para tratar os eventos do Socket
+    socketEvents(){
+        this.socket.on('connection', () => {
+            this.socket.emit('socketID', (id) => {
+                console.log(id)
+            })
+        })
+
+    }
 }
+
+
+
+
+
+
+
+
+
 

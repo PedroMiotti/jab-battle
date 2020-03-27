@@ -14,12 +14,19 @@
         
   
         
-    // Socket.io    
+    // Socket.io   
+    // Event for when a new player connects 
     io.on('connection', function (socket) {
+
         console.log('a user connected');
+        socket.emit('socketID', {id: socket.id} ) // Criando um ID do socket para o player
+
         socket.on('disconnect', function () {
+
           console.log('user disconnected');
+
         });
+
       });
   
 
