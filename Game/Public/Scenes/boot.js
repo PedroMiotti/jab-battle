@@ -32,45 +32,17 @@ class Boot extends Phaser.Scene {
             // Sprites
                 // Tommy
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/sprites.png", 'Assets/Sprites/JSON/sprites.json')
-                // loading tommy script
-                this.load.script('Tommy', '../Characters/tommy.js')
 
                 
     }
 
     create() {
 
-        this.connectToSocket()
-        this.socketEvents()
-
         // Escondendo a TextBox da Tela Nome
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
 
         this.scene.start('telaInicial')
-
-    }
-
-    // Funcao para connectar o client to the socket
-    connectToSocket(){
-        try{
-            this.socket = io()
-        }
-        catch(err){
-            console.log(err)
-        }
-
-    }
-
-    // Funcao para tratar os eventos do Socket
-    socketEvents(){
-        let socket = io.connect("http://localhost:8090/", { reconnection: false })
-
-        
-
-        socket.emit('new_player', {x: 'Hello'})
-
-        
 
     }
 }

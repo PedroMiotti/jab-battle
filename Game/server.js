@@ -12,6 +12,11 @@
     // MIDDLEWARES
         app.use(express.static(__dirname + '/Public')) // Using the Public folder as the static folder
         
+
+
+
+
+        
     // Array for the socket.id of every player in the game
     let players = []
 
@@ -22,41 +27,37 @@
     // Event for when a new player connects 
     io.on('connection', function (socket) {
 
-        console.log('a user connected');
+        console.log('User connected')
 
-        socket.on('new_player',(x_posi) =>{
+        // Adiciona o Jogador no array Players
+        players.push(socket.id)
+
+        socket.on('new_player',(nome_player) =>{
 
              player_info = {
-                x: x_posi,
-                playerID: socket.id
+                x: 100,
+                playerID: socket.id,
+                nome: nome_player
             }
 
-            console.log(player_info.x)
+        })
 
-        } )
-
+        console.log(players)
+        console.log(player_info)
 
        // Event for when a player disconnects
         socket.on('disconnect', function () {
 
-          console.log('user disconnected');
-        });
+          console.log('User disconnected')
 
-      });
+          // Removendo jogador do array players quando se desconecta
+          let id_index = players.indexOf(socket.id) // Pegando o Index do id no array
+          players.splice(id_index, 1) // Removendo o id pelo index
+
+        })
+
+      })
   
-    // io.on('connection', function(socket) {
-    //     console.log('client connected');
-    
-    //     // listen for incoming data msg on this newly connected socket
-    //     socket.on('data', function (data) {
-
-    //         console.log(`data received is '${data}'`)
-
-    //     });
-
-    //     socket.emit('new_event', 'data here')
-    
-    // });
 
 // PORT CONFIG
     const PORT = process.env.PORT || 8090
