@@ -32,7 +32,8 @@ class Boot extends Phaser.Scene {
             // Sprites
                 // Tommy
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/sprites.png", 'Assets/Sprites/JSON/sprites.json')
-                
+                // loading tommy script
+                this.load.script('Tommy', '../Characters/tommy.js')
 
                 
     }
@@ -63,11 +64,13 @@ class Boot extends Phaser.Scene {
 
     // Funcao para tratar os eventos do Socket
     socketEvents(){
-        this.socket.on('connection', () => {
-            this.socket.emit('socketID', (id) => {
-                console.log(id)
-            })
-        })
+        let socket = io.connect("http://localhost:8090/", { reconnection: false })
+
+        
+
+        socket.emit('new_player', {x: 'Hello'})
+
+        
 
     }
 }
