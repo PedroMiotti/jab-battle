@@ -17,8 +17,6 @@
 
 
     let roomno = 0
-    // Array for the socket.id of every player in the game
-    let players = []
 
     // Object for the player's info
     let player_info = {}    
@@ -28,9 +26,6 @@
     io.on('connection', function (socket) {
 
         console.log('User connected Id : ' + socket.id)
-
-        // Adiciona o Jogador no array Players
-        players.push(socket.id)
 
         socket.on('new_player', (nome_player) =>{
 
@@ -42,7 +37,7 @@
 
         })
 
-        socket.on('create_room', () => {
+        socket.on('join_room', () => {
             
             // Getting how many player are connected to the room
             let playersInRoom
@@ -52,7 +47,7 @@
                 
                     // Room max = 2
                     chooseRoom: {
-                        if(playersInRoom >= 2){
+                        if(playersInRoom > 1){
                         socket.on('create_new_room', () => {
                             socket.join('room_' + roomno)
                         
@@ -62,19 +57,25 @@
 
                     // If there is a room with only one player in it join
                     else{
+
                         socket.join('room_' + roomno)
-                        console.log("Else")
-                        break chooseRoom
-                        
-                    }
+                        console.log("Here 2")
+      
+                                     break chooseRoom
+                         }
                 
                     roomno++
-                    console.log(roomno)
+                    console.log(socket.adapter.rooms)
                     
 
                     
                 }
             })
+            // .then(() => {
+            //     if(playersInRoom === 1){
+            //         console.log("AQUI 1")
+            //     }
+            // })
 
         })
         
@@ -83,9 +84,6 @@
 
           console.log('User disconnected')
 
-          // Removendo jogador do array players quando se desconecta
-          let id_index = players.indexOf(socket.id) // Pegando o Index do id no array
-          players.splice(id_index, 1) // Removendo o id pelo index
 
         })
 
