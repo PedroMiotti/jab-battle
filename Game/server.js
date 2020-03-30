@@ -76,12 +76,6 @@
                 }
             })
 
-            console.log(socket.adapter.rooms['room_' + roomno])
-
-            
-
-            
- 
         })
         
        // Event for when a player disconnects
