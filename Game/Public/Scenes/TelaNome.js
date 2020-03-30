@@ -1,8 +1,7 @@
-
-
 class TelaNome extends Phaser.Scene {
     constructor(){
         super('telaNome')
+
     }
 
  
@@ -12,8 +11,6 @@ class TelaNome extends Phaser.Scene {
         this.background = this.add.image(0, 0, 'telanomeBG')
         this.background.setOrigin(0, 0)
 
-        // Conectando ao socket
-        this.connectToSocket()
 
         // Text Box
         this.inputBox = document.getElementById('nameBox')
@@ -55,23 +52,17 @@ class TelaNome extends Phaser.Scene {
 
     }
 
-     // Funcao para connectar o client to the socket
-     connectToSocket(){
-        try{
-            this.socket = io()
-        }
-        catch(err){
-            console.log(err)
-        }
-
-    }
-
+ 
      // Funcao para tratar os eventos do Socket
      socketEvents(nome_player){
-        let socket = io.connect("http://localhost:8090/", { reconnection: false })
-        
+
         // Mandando o nome do jogador para o array player_info
-        this.socket.emit('new_player',  nome_player)
+       socket.emit('new_player',  nome_player)
+
+        socket.emit('create_room')
+        socket.emit('create_new_room')
+
+        
     }
 
 }

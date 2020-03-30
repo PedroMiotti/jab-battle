@@ -18,7 +18,24 @@ const config = {
   };
 
   // Phaser Instance
-  const game = new Phaser.Game(config);
+  const game = new Phaser.Game(config, connectToSocket());
+
+
+
+  //  Funcao para connectar o client to the socket
+  function connectToSocket(){
+    try{
+
+        socket = io()
+
+    }
+    catch(err){
+
+        console.log(err)
+          
+    }
+
+  }
  
 
 

@@ -2,6 +2,8 @@ class Boot extends Phaser.Scene {
     constructor(){
         super('boot')
 
+        
+
     }
 
     preload() {
@@ -32,8 +34,7 @@ class Boot extends Phaser.Scene {
             // Sprites
                 // Tommy
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/sprites.png", 'Assets/Sprites/JSON/sprites.json')
-
-                
+ 
     }
 
     create() {
@@ -45,6 +46,7 @@ class Boot extends Phaser.Scene {
         this.scene.start('telaInicial')
 
     }
+
 }
 
 
