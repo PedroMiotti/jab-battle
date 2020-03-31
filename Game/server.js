@@ -16,7 +16,7 @@
 
 
 
-    let roomno = 0
+    let roomno = 1
 
     // Object for the player's info
     let player_info = {}    
@@ -27,7 +27,7 @@
 
         console.log('User connected Id : ' + socket.id)
 
-        socket.on('new_player', (nome_player) =>{
+        socket.on('info_player', (nome_player) =>{
 
              player_info[socket.id] = {
                 x: 100,
@@ -37,20 +37,24 @@
 
         })
 
-        socket.on('join_room', () => {
+        socket.on('new_player_room', () => {
             
             // Getting how many player are connected to the room
             let playersInRoom
+
             io.in('room_' + roomno).clients((err, clients) => {
+                console.log(clients)
 
                 playersInRoom = clients.length
-                
+
+                chooseRoom: {
                     // Room max = 2
-                    chooseRoom: {
-                        if(playersInRoom > 1){
+                    if(playersInRoom > 1){
                         socket.on('create_new_room', () => {
+                            
                             socket.join('room_' + roomno)
-                        
+                            console.log("Players in the room : "+ roomno + " : " + playersInRoom  )
+                    
                         })
 
                     }
@@ -59,30 +63,33 @@
                     else{
 
                         socket.join('room_' + roomno)
-                        console.log("Here 2")
-      
-                                     break chooseRoom
-                         }
+                        console.log("Players in the room : "+ roomno + " : " + playersInRoom  )
+                        break chooseRoom
+                    }
                 
                     roomno++
-                    console.log(socket.adapter.rooms)
-                    
-
-                    
+           
                 }
             })
-            // .then(() => {
-            //     if(playersInRoom === 1){
-            //         console.log("AQUI 1")
-            //     }
-            // })
-
         })
         
        // Event for when a player disconnects
         socket.on('disconnect', function () {
 
-          console.log('User disconnected')
+            console.log('User disconnected')
+
+            // Pegando qual room o usuario esta
+            let rooms = Object.keys(socket.rooms).filter(function(item) {
+                return item !== socket.id;
+            });
+
+            // Deletando o usuario daquele room
+            io.of('/').in(rooms).clients((error, socketIds) => {
+                if (error) throw error;
+            
+                socketIds.forEach(socketId => io.sockets.sockets[socketId].leave(rooms));
+            
+            });
 
 
         })

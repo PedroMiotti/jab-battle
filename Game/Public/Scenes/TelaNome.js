@@ -57,9 +57,9 @@ class TelaNome extends Phaser.Scene {
      socketEvents(nome_player){
 
         // Mandando o nome do jogador para o array player_info
-       socket.emit('new_player',  nome_player)
+       socket.emit('info_player',  nome_player)
 
-        socket.emit('join_room')
+        socket.emit('new_player_room')
         socket.emit('create_new_room')
 
         
