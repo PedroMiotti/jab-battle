@@ -17,6 +17,8 @@ class Boot extends Phaser.Scene {
             // Botao Config
             this.load.image('configBotao', 'Assets/UI/ConfigBotao1.png')
 
+// ------------------------------------------------------------------------
+
          // Tela Nome 
 
             // Background
@@ -25,7 +27,22 @@ class Boot extends Phaser.Scene {
             this.load.image('botaoVoltar', 'Assets/UI/BackButton.png')
             // Botao Fight
             this.load.image('botaoFight', 'Assets/UI/FightButton.png' )
-            
+
+// ------------------------------------------------------------------------
+
+    // Tela Encontrando Jogador
+
+        // Background 
+        this.load.image('telaencontrarjogadorBG', ' Assets/img/TelaEncontrandoJogador.png')
+        // Ponto 
+        // this.load.spritesheet('pontoanimacao', 'Assets/UI/pontosSpritesheet.png', {frameWidth:6 , frameHeight: 7})
+        this.load.image('ponto', 'Assets/UI/ponto.png')
+
+        // Luva Azul
+        this.load.image('luvaazul', 'Assets/UI/LuvaAzul.png')
+
+// ------------------------------------------------------------------------
+        
         // Tela Ringue
 
             // Background 

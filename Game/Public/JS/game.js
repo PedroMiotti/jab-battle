@@ -14,7 +14,7 @@ const config = {
         gravity: { y: 0 }
       }
     },
-    scene: [Boot, TelaInicial, TelaNome, TelaRingue] 
+    scene: [Boot, TelaInicial, TelaNome,TelaEncJogador, TelaRingue] 
   };
 
   // Phaser Instance

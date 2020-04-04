@@ -35,12 +35,16 @@
 
             let info = {
                 x: 100,
+                y: 310,
                 playerID: socket.id,
                 socket: socket,
                 nome: nome_player,
                 room: null
             };
+
             player_info[socket.id] = info;
+
+            // Segundo jogador
             if (lastRoom) {
                 // entra na room
                 info.room = lastRoom;
@@ -67,53 +71,24 @@
     // uhauhauahua nada!!! 'e que eu j'a fiz isso algumas vezes antes.... por isso ja ate sei o que nao vai bem e o que +- vai.... :)
     // kkk bele, brigadao rafa, vai la pra reuniao agradeco 
     // IMagina!!! TMJ!
-        })
+        })      
 
-        // esse aqui passa a ser desnecess'ario!
-        socket.on('new_player_room', () => {
-            
-            // Getting how many player are connected to the room
-            let playersInRoom
-
-            io.in('room_' + roomno).clients((err, clients) => {
-                console.log(clients)
-
-                playersInRoom = clients.length
-
-                chooseRoom: {
-                    // Room max = 2
-                    if(playersInRoom > 1){
-                        socket.on('create_new_room', () => {
-                            
-                            socket.join('room_' + roomno)
-                            console.log("Players in the room : "+ roomno + " : " + playersInRoom  )
-                    
-                        })
-
-                    }
-
-                    // If there is a room with only one player in it join
-                    else{
-
-                        socket.join('room_' + roomno)
-                        console.log("Players in the room : "+ roomno + " : " + playersInRoom  )
-                        break chooseRoom
-                    }
-                
-                    roomno++
-           
-                }
-            })
-        })
-        
-
-        socket.on('msg_qualquer', () => {
+        socket.on('connecting_players', () => {
             let info = player_info[socket.id];
             if (!info) {
                 // hacker! :)
                 return;
             }
+
             let room = info.room;
+            
+            if(room.player2 === null){
+                socket.emit('check_player2', room.player2)
+            }
+
+            console.log(room)
+
+
             if (!room) {
                 // hacker 2 :)
                 return;
@@ -136,6 +111,7 @@
                 // Por algum motivo bizarro, esse socket nao tinha nem um player_info...
                 return;
             }
+
             info.socket = null; // muito importante! garbage collector!
             delete player_info[socket.id]; // Mas ele nao retorna um json gigante ??
             // O socket 'e o objeto. esse voc^e nao vai enviar para o cliente
@@ -144,7 +120,8 @@
             // o outro player_info... E como nesse player_info voc^e j'a tem o socket direto, o envio das mensagens fica bem mais de boa...
             // da uma olhada
             let room = info.room;
-            info.room = null; // ajuda o garbage collector!  entendi rafa, depois quando tiver um tempo pode me explicar esse garbage collector ?
+            info.room = null; 
+            // ajuda o garbage collector!  entendi rafa, depois quando tiver um tempo pode me explicar esse garbage collector ?
             // belea! 'e o cara que joga fora todos os objetos que nao estao mais sendo utilizados... tem no Java, JS, C#, phyton.......... :) mas as infos dos objs ficam em cache ??
             // todas as variaveis aqui ficam na RAM do servidor!!!
             // se voc^e fosse fazer um esquema desse real, para milhoes de players, cada server ia suportar um numero maximo de salas
@@ -166,21 +143,6 @@
                 room.player1 = null; // ajuda o garbage collector!
                 room.player2 = null; // ajuda o garbage collector!
             }
-
-            // Passa a ser desnecessario....
-            /*// Pegando qual room o usuario esta
-            let rooms = Object.keys(socket.rooms).filter(function(item) {
-                return item !== socket.id;
-            });
-
-            // Deletando o usuario daquele room
-            io.of('/').in(rooms).clients((error, socketIds) => {
-                if (error) throw error;
-            
-                socketIds.forEach(socketId => io.sockets.sockets[socketId].leave(rooms));
-            
-            });*/
-
 
         })
 
