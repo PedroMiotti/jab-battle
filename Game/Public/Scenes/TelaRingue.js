@@ -3,9 +3,7 @@ class TelaRingue extends Phaser.Scene {
         super('telaRingue')
     }
 
-    // Characters
     
-
     create(){
 
         // Setting Background

@@ -63,6 +63,7 @@
                     player2: null
                 }
                 rooms[roomno] = lastRoom;
+                console.log(info)
                 roomno++;
                 info.room = lastRoom;
             }

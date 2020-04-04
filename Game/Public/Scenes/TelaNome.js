@@ -47,7 +47,7 @@ class TelaNome extends Phaser.Scene {
             this.inputBoxValue = document.getElementById('nameBox').value
             this.socketEvents(this.inputBoxValue)
             // this.scene.start('TelaEncJogador')
-            this.scene.start('TelaRingue')            
+            this.scene.start('telaRingue')           
         })
 
     }
@@ -67,11 +67,7 @@ class TelaNome extends Phaser.Scene {
        
    }
 
-       
-
-
-        
-    }
+}
 
 
 
