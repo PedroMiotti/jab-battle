@@ -46,8 +46,8 @@ class TelaNome extends Phaser.Scene {
             // Getting the value of the text box
             this.inputBoxValue = document.getElementById('nameBox').value
             this.socketEvents(this.inputBoxValue)
-            // this.scene.start('TelaEncJogador')
-            this.scene.start('telaRingue')           
+            this.scene.start('TelaEncJogador')
+            // this.scene.start('telaRingue')           
         })
 
     }
@@ -55,12 +55,6 @@ class TelaNome extends Phaser.Scene {
  
      // Funcao para tratar os eventos do Socket
      socketEvents(nome_player){
-        socket.emit('connecting_players')
-        // Evento para checar se o player2 e null
-        socket.on('check_player2', player2 => {
-            this.player_2 = player2
-            console.log(player2)
-        })
 
         // Mandando o nome do jogador para o array player_info
        socket.emit('info_player',  nome_player)
