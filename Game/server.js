@@ -49,12 +49,7 @@
                 // entra na room
                 info.room = lastRoom;
                 lastRoom.player2 = info;
-                lastRoom = null; // O pr'oximo player que entrar vai criar uma room nova
-                // comeca o jogo
-                // para avisar os players que o jogo vai comecar, nao pode mais usar o lastRoom, porque ele e null
-                // usa info.room...
-                // Agora.... eu sou meio xiita... se quiser, para facilitar ainda mais, armazena logo o socket no info, nao s'o o id...
-                // tipo assim
+                lastRoom = null; 
             } else {
                 // esse era o primeiro player na room
                 lastRoom = {
@@ -63,15 +58,11 @@
                     player2: null
                 }
                 rooms[roomno] = lastRoom;
-                console.log(info)
+                // console.log(lastRoom)
                 roomno++;
                 info.room = lastRoom;
             }
-    // deu para entender a logica????? Sim, voce ta fazendo sem testar, so de cabeca ??
-    // sim.... estou digitando aqui... Provavelmente vai dar certinho... :) Carai rafa um dia vou ser assim kkk
-    // uhauhauahua nada!!! 'e que eu j'a fiz isso algumas vezes antes.... por isso ja ate sei o que nao vai bem e o que +- vai.... :)
-    // kkk bele, brigadao rafa, vai la pra reuniao agradeco 
-    // IMagina!!! TMJ!
+    
         })      
 
         socket.on('connecting_players', () => {
@@ -81,25 +72,47 @@
                 return;
             }
 
-            let room = info.room;
-            
-            if(room.player2 === null){
-                socket.emit('check_player2', room.player2)
-            }
-
-            console.log(room)
-
-
-            if (!room) {
+            // let room = info.room;
+             
+            if (!info.room) {
                 // hacker 2 :)
                 return;
             }
-            if (room.player1 === info) {
+            if (info.room.player1 === info) {
+                
+                if(info.room.player2 === null){
+                    let player2 = null
+                    socket.emit('check_player2', player2)
+                }
+                else{
+                    let player_2_info = {
+                        x : info.room.player2.x,
+                        y : info.room.player2.y,
+                        playerID: info.room.player2.playerID,
+                        nome: info.room.player2.nome_player,
+                    }
+
+                    socket.emit('check_player2', player_2_info)
+                    socket.to(info.room).emit('addPlayer', player_2_info)
+                    // io.to(`${info.room.player1.playerID}`).emit('addPlayer', player_2_info);
+                }
                 // manda algo para o player2 +- assim
                 //room.player2.socket.send....
+                
             } else {
-                // manda algo para o player1 +- assim
-                //room.player1.socket.send....
+                // Send to player 1
+                let player_1_info = {
+                    x : info.room.player1.x,
+                    y : info.room.player1.y,
+                    playerID: info.room.player1.playerID,
+                    nome: info.room.player1.nome_player,
+                }
+
+                socket.emit('check_player2', player_1_info)
+                socket.to(info.room).emit('addPlayer', player_1_info)
+                // socket.emit('addPlayer', player_1_info)
+                // io.to(`${info.room.player2.playerID}`).emit('addPlayer', player_1_info);
+
             }
         });
        // Event for when a player disconnects
@@ -113,25 +126,11 @@
                 return;
             }
 
-            info.socket = null; // muito importante! garbage collector!
-            delete player_info[socket.id]; // Mas ele nao retorna um json gigante ??
-            // O socket 'e o objeto. esse voc^e nao vai enviar para o cliente
-            // pode enviar um objeto novo, que voce cria na hora de enviar as mensagens
-            // porque a'i, tendo um player, voc^e vai ter a room do player, e com a room, voc^e j'a vai ter
-            // o outro player_info... E como nesse player_info voc^e j'a tem o socket direto, o envio das mensagens fica bem mais de boa...
-            // da uma olhada
+            info.socket = null;// garbage collector!
+            delete player_info[socket.id]; 
             let room = info.room;
             info.room = null; 
-            // ajuda o garbage collector!  entendi rafa, depois quando tiver um tempo pode me explicar esse garbage collector ?
-            // belea! 'e o cara que joga fora todos os objetos que nao estao mais sendo utilizados... tem no Java, JS, C#, phyton.......... :) mas as infos dos objs ficam em cache ??
-            // todas as variaveis aqui ficam na RAM do servidor!!!
-            // se voc^e fosse fazer um esquema desse real, para milhoes de players, cada server ia suportar um numero maximo de salas
-            // ai, no momento da conexao, voce precisaria dizer para o client qual o IP que ele teria que se conectar, para gerar um balanceamento de carga
-            // tudo que esta aqui est'a na RAM do server...
-            // O garbage collector joga fora e libera memoria de coisas qu enao estao mais sendo utilizadas ;)
-            // quando a gente se falar de novo, com mais carinho, eu te explico, sim! :)
-            // Bele entendi um pouco sim depois vou dar uma lida melhor, agradeco a atencao // imagina!!! valeu!!
-            // tmj! qualquer CountQueuingStrategy, me d'a um toque! falouuuuuuuuu! []'s 
+     
             if (room) {
                 delete rooms[room.id];
                 if (room.player1 && room.player1 !== info) {
@@ -141,8 +140,8 @@
                     // o player saindo era o player1
                     // avisa room.player2 que acabou o jogo!
                 }
-                room.player1 = null; // ajuda o garbage collector!
-                room.player2 = null; // ajuda o garbage collector!
+                room.player1 = null; //  garbage collector!
+                room.player2 = null; //  garbage collector!
             }
 
         })

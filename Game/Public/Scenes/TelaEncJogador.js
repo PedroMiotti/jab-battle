@@ -38,45 +38,49 @@ class TelaEncJogador extends Phaser.Scene {
 
         })
 
-  
+        
         
 
-        
     }
 
     update(){
-        // this.socketEvents()
+        this.checkingPlayer2()
 
-        let dots = window.setInterval( () => {
+        // let dots = window.setInterval( () => {
            
-            if ( this.ponto3.visible === true ) {
-                this.ponto1.visible = true
-                this.ponto2.visible = false
-                this.ponto3.visible = false
-            }
-            else{ 
-                this.ponto1.visible = false
-                this.ponto2.visible = true
+        //     if ( this.ponto3.visible === true ) {
+        //         this.ponto1.visible = true
+        //         this.ponto2.visible = false
+        //         this.ponto3.visible = false
+        //     }
+        //     else{ 
+        //         this.ponto1.visible = false
+        //         this.ponto2.visible = true
                 
-            }
+        //     }
 
-            if(this.ponto2.visible === true){
-                this.ponto2.visible = false
-                this.ponto3.visible = true
+        //     if(this.ponto2.visible === true){
+        //         this.ponto2.visible = false
+        //         this.ponto3.visible = true
 
-            }
-        }, 100);
+        //     }
+        // }, 100);
       
     }
 
-    socketEvents(){
+    checkingPlayer2(){
         socket.emit('connecting_players')
+        
         // Evento para checar se o player2 e null
         socket.on('check_player2', player2 => {
             this.player_2 = player2
-            console.log(player2)
+            if(this.player_2 !== null){
+                this.scene.start('telaRingue')
+            }
         })
+        
     }
+
 
 
 }

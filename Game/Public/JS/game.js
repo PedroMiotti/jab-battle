@@ -26,7 +26,7 @@ const config = {
   function connectToSocket(){
     try{
 
-        socket = io()
+        socket = io.connect()
 
     }
     catch(err){

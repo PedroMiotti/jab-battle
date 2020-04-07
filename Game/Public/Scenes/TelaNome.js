@@ -55,9 +55,13 @@ class TelaNome extends Phaser.Scene {
  
      // Funcao para tratar os eventos do Socket
      socketEvents(nome_player){
-
+        
         // Mandando o nome do jogador para o array player_info
        socket.emit('info_player',  nome_player)
+       
+
+       
+       
        
    }
 

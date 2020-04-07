@@ -92,11 +92,25 @@ class TelaRingue extends Phaser.Scene {
         this.inputBox = document.getElementById('nameBox')
         this.inputBox.style.display = "none"
 
+        
+
     }
 
     update(){
+        // SOCKET CONTROL
+            this.socketEvents()
+
          // CHARACTER CONTROL
             this.movePlayers()            
+    }
+
+    socketEvents(){
+
+        // Event to receive data and add the player to the screen
+        socket.on('addPlayer', data => {
+            console.log(data.x)
+
+        })
     }
 
     // FUNCAO PARA MOVER OS JOGADORES
