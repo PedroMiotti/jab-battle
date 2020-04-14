@@ -64,12 +64,5 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
 
     }
 
-    
 
-
- 
-
-    
-
- 
 }

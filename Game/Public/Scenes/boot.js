@@ -4,10 +4,6 @@ class Boot extends Phaser.Scene {
     }
 
     preload() {
-
-        // Escondendo a TextBox da Tela Nome
-        this.inputBox = document.getElementById('nameBox')
-        this.inputBox.style.display = "none"
         
         let progressBar = this.add.graphics();
         let progressBox = this.add.graphics();
@@ -91,6 +87,17 @@ class Boot extends Phaser.Scene {
             this.load.image('botaoVoltar', 'Assets/UI/BackButton.png')
             // Botao Fight
             this.load.image('botaoFight', 'Assets/UI/FightButton.png' )
+
+        // Tela Encontrando Jogador
+            // Background
+            this.load.image('telaencontrarjogadorBG', 'Assets/img/TelaEncontrandoJogador.png')
+
+            // Ponto
+            this.load.image('ponto', 'Assets/UI/ponto.png')
+
+            // Luva Azul
+            this.load.image('LuvaAzul', 'Assets/UI/LuvaAzul1.png')
+
             
         // Tela Ringue
 
@@ -109,17 +116,10 @@ class Boot extends Phaser.Scene {
     create() {
 
         this.add.image(512, 384, 'logo');
-
-        // Escondendo a TextBox da Tela Nome
-        this.inputBox = document.getElementById('nameBox')
-        this.inputBox.style.display = "none"
-
+        
         setTimeout(() => { 
             this.scene.start('telaInicial') 
         }, 100);
-        
-
-        
 
     }
 

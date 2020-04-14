@@ -13,22 +13,9 @@ class TelaNome extends Phaser.Scene {
 
 
         // Text Box
-        this.inputBox = document.getElementById('nameBox')
-        // Text Box Style
-        this.inputBox.style.display = "block"
-        this.inputBox.style.position = "absolute"
-        this.inputBox.style.marginLeft = "363px"
-        this.inputBox.style.marginTop = "328px"
-        this.inputBox.style.width = "283px"
-        this.inputBox.style.height = "43px"
-        this.inputBox.style.border = "0px solid #1C6EA4"
-        this.inputBox.style.borderRadius = "10px"
-        this.inputBox.style.outline = "none"
-        this.inputBox.style.fontFamily = "impact"
-        this.inputBox.style.fontSize = "25px"
+        this.textBox = document.getElementById('box')
+        this.textBox.innerHTML = '<input id="nameBox" type="text" placeholder="Nome"></input>'
 
-        
-    
         // Botao Voltar
         this.botaoJogar = this.add.image(395,520, 'botaoVoltar')
         .setInteractive()
@@ -44,25 +31,23 @@ class TelaNome extends Phaser.Scene {
         .on('pointerdown', () => {
 
             // Getting the value of the text box
-            this.inputBoxValue = document.getElementById('nameBox').value
+            this.inputBoxValue = this.textBox.value
             this.socketEvents(this.inputBoxValue)
+
+            // Hidding textBox
+            this.textBox.style.display = "none"
             this.scene.start('TelaEncJogador')
             // this.scene.start('telaRingue')           
         })
 
     }
 
- 
      // Funcao para tratar os eventos do Socket
      socketEvents(nome_player){
         
-        // Mandando o nome do jogador para o array player_info
+        // Mandando o nome do jogador para o objeto player_info
        socket.emit('info_player',  nome_player)
-       
-
-       
-       
-       
+    
    }
 
 }

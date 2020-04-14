@@ -36,6 +36,8 @@
             let info = {
                 x: 100,
                 y: 310,
+                life: 100,
+                character: 'tommy', // TODO add 'chosenChar' to the params to receive the chosenCharacter from the chooseChar screen
                 playerID: socket.id,
                 socket: socket,
                 nome: nome_player,
@@ -49,8 +51,10 @@
                 // entra na room
                 info.room = lastRoom;
                 lastRoom.player2 = info;
+                
                 lastRoom = null; 
-            } else {
+            } 
+            else {
                 // esse era o primeiro player na room
                 lastRoom = {
                     id: roomno,
@@ -58,12 +62,30 @@
                     player2: null
                 }
                 rooms[roomno] = lastRoom;
-                // console.log(lastRoom)
+                
                 roomno++;
                 info.room = lastRoom;
             }
     
-        })      
+        })  
+        
+        // * Vendo se o player 2 ja se conectou
+        socket.on('checkPlayer2', () => {
+            let info = player_info[socket.id]
+        
+            if (info.room.player2 === null) {
+
+                socket.emit("check_player2", null);
+
+            } 
+            else {
+
+                socket.emit("check_player2", "GoToFight");
+            
+            }
+
+        })
+
 
         socket.on('connecting_players', () => {
             let info = player_info[socket.id];
@@ -71,48 +93,33 @@
                 // hacker! :)
                 return;
             }
-
-            // let room = info.room;
              
             if (!info.room) {
                 // hacker 2 :)
                 return;
             }
             if (info.room.player1 === info) {
-                
-                if(info.room.player2 === null){
-                    let player2 = null
-                    socket.emit('check_player2', player2)
-                }
-                else{
-                    let player_2_info = {
-                        x : info.room.player2.x,
-                        y : info.room.player2.y,
-                        playerID: info.room.player2.playerID,
-                        nome: info.room.player2.nome_player,
-                    }
+                // * Player1
+                let player2 = info.room.player2
+                let player1 = info.room.player1
 
-                    socket.emit('check_player2', player_2_info)
-                    socket.to(info.room).emit('addPlayer', player_2_info)
-                    // io.to(`${info.room.player1.playerID}`).emit('addPlayer', player_2_info);
-                }
+                socket.emit('OponentData', player2.playerID, player2.character, player2.x, player2.y, player2.nome)
+                socket.emit('CurrentPlayerData', player1.playerID, player1.character, player1.x, player1.y, player1.nome)
                 // manda algo para o player2 +- assim
-                //room.player2.socket.send....
+                //room.player2.socket.send.... 
                 
-            } else {
-                // Send to player 1
-                let player_1_info = {
-                    x : info.room.player1.x,
-                    y : info.room.player1.y,
-                    playerID: info.room.player1.playerID,
-                    nome: info.room.player1.nome_player,
-                }
+                
+            } 
+            else {
+                // * Player2
 
-                socket.emit('check_player2', player_1_info)
-                socket.to(info.room).emit('addPlayer', player_1_info)
-                // socket.emit('addPlayer', player_1_info)
-                // io.to(`${info.room.player2.playerID}`).emit('addPlayer', player_1_info);
+                let player1 = info.room.player1
+                let player2 = info.room.player2
 
+                socket.emit('OponentData', player1.playerID, player1.character, player1.x, player1.y, player1.nome)
+                socket.emit('CurrentPlayerData', player2.playerID, player2.character, player2.x, player2.y, player2.nome)
+                // manda algo para o player1 +- assim
+                //room.player1.socket.send....
             }
         });
        // Event for when a player disconnects
