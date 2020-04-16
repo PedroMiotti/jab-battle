@@ -36,7 +36,7 @@ class TelaNome extends Phaser.Scene {
 
             // Hidding textBox
             this.textBox.style.display = "none"
-            this.scene.start('TelaEncJogador')
+            this.scene.start('TelaChooseChar')
             // this.scene.start('telaRingue')           
         })
 

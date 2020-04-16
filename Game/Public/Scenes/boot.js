@@ -88,6 +88,11 @@ class Boot extends Phaser.Scene {
             // Botao Fight
             this.load.image('botaoFight', 'Assets/UI/FightButton.png' )
 
+        // Tela Escolher jogador
+
+            // Background
+            this.load.image('telachooseCharBG', 'Assets/img/TelaChooseChar.png')
+
         // Tela Encontrando Jogador
             // Background
             this.load.image('telaencontrarjogadorBG', 'Assets/img/TelaEncontrandoJogador.png')
