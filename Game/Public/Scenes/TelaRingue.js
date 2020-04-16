@@ -9,8 +9,9 @@ class TelaRingue extends Phaser.Scene {
         this.background = this.add.image(0, 0, 'telaringueBG')
         this.background.setOrigin(0, 0)
 
-        // // Loading Characters 
+        // Loading Characters 
         this.tommy = this.physics.add.sprite(300, 450,'Tommy', 'Tommy_01.png')
+        this.tommy = this.physics.add.sprite(300, 450,'Jax', 'SpriteSheetJax_01.png')
 
         // Adding physics to the character
         this.tommy.setCollideWorldBounds(true);
@@ -20,28 +21,68 @@ class TelaRingue extends Phaser.Scene {
         // ANIMATIONS
             // TOMMY
                 //WALK
+                // this.anims.create({
+                //     key: "walk",
+                //     repeat: -1,
+                //     frameRate: 6,
+                //     frames: this.anims.generateFrameNames('Tommy', {
+                //         prefix: 'Tommy_',
+                //         suffix: ".png",
+                //         start: 7,
+                //         end: 10,
+                //         zeroPad: 2,
+                //     })
+                // })
+
+                // // IDLE
+                // this.anims.create({
+                //     key: "idle",
+                //     repeat: -1,
+                //     frameRate: 3,
+                //     frames: this.anims.generateFrameNames('Tommy', {
+                //         prefix: 'Tommy_',
+                //         suffix: ".png",
+                //         start: 3,
+                //         end: 4,
+                //         zeroPad: 2,
+                //     })
+                // })
+
+                // //JAB
+                // this.anims.create({
+                //     key: "jab",
+                //     repeat: -1,
+                //     frameRate: 4,
+                //     frames: this.anims.generateFrameNames('Tommy', {
+                //         prefix: 'Tommy_',
+                //         suffix: ".png",
+                //         start: 5,
+                //         end: 6,
+                //         zeroPad: 2,
+                //     })
+                // })
+
+                // // DIRETO
+                // this.anims.create({
+                //     key: "direto",
+                //     repeat: -1,
+                //     frameRate: 4,
+                //     frames: this.anims.generateFrameNames('Tommy', {
+                //         prefix: 'Tommy_',
+                //         suffix: ".png",
+                //         start: 1,
+                //         end: 2,
+                //         zeroPad: 2,
+                //     })
+                // })
                 this.anims.create({
                     key: "walk",
                     repeat: -1,
                     frameRate: 6,
-                    frames: this.anims.generateFrameNames('Tommy', {
-                        prefix: 'Tommy_',
+                    frames: this.anims.generateFrameNames('Jax', {
+                        prefix: 'SpriteSheetJax_',
                         suffix: ".png",
-                        start: 7,
-                        end: 10,
-                        zeroPad: 2,
-                    })
-                })
-
-                // IDLE
-                this.anims.create({
-                    key: "idle",
-                    repeat: -1,
-                    frameRate: 3,
-                    frames: this.anims.generateFrameNames('Tommy', {
-                        prefix: 'Tommy_',
-                        suffix: ".png",
-                        start: 3,
+                        start: 1,
                         end: 4,
                         zeroPad: 2,
                     })
@@ -52,8 +93,8 @@ class TelaRingue extends Phaser.Scene {
                     key: "jab",
                     repeat: -1,
                     frameRate: 4,
-                    frames: this.anims.generateFrameNames('Tommy', {
-                        prefix: 'Tommy_',
+                    frames: this.anims.generateFrameNames('Jax', {
+                        prefix: 'SpriteSheetJax_',
                         suffix: ".png",
                         start: 5,
                         end: 6,
@@ -66,11 +107,11 @@ class TelaRingue extends Phaser.Scene {
                     key: "direto",
                     repeat: -1,
                     frameRate: 4,
-                    frames: this.anims.generateFrameNames('Tommy', {
-                        prefix: 'Tommy_',
+                    frames: this.anims.generateFrameNames('Jax', {
+                        prefix: 'SpriteSheetJax_',
                         suffix: ".png",
-                        start: 1,
-                        end: 2,
+                        start: 7,
+                        end: 8,
                         zeroPad: 2,
                     })
                 })
@@ -114,21 +155,15 @@ class TelaRingue extends Phaser.Scene {
 
             }
 
-            else if (this.keys.jab.isDown){
-                this.tommy.anims.play('jab')
-            }
+            // else if (this.keys.jab.isDown){
+            //     this.tommy.anims.play('jab')
+            // }
 
-            else if (this.keys.direto.isDown){
-                this.tommy.anims.play('direto')
+            // else if (this.keys.direto.isDown){
+            //     this.tommy.anims.play('direto')
 
-            }
+            // }
 
-            else{
-
-                this.tommy.setVelocityX(0);
-                this.tommy.anims.play('idle')
-
-            }
 
         }
 }
