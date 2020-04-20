@@ -24,8 +24,5 @@ class TelaInicial extends Phaser.Scene {
         .setInteractive()
         .on('pointerdown', () => {console.log('Config')})
 
-       // Escondendo a TextBox da Tela Nome
-       this.inputBox = document.getElementById('nameBox')
-       this.inputBox.style.display = "none"
     }
 }
