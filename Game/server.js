@@ -21,6 +21,9 @@
     // Object for the player's info
     let player_info = {}    
 
+    // Players ID in room
+    let players_id = []
+
     let rooms = {}
 
     let lastRoom = null
@@ -29,7 +32,7 @@
     // Event for when a new player connects 
     io.on('connection', function (socket) {
 
-        console.log('User connected Id : ' + socket.id)
+        console.log(`User connected, Id : ${socket.id}` )
 
         socket.on('info_player', (nome_player, chosen_char) =>{
 
@@ -51,7 +54,10 @@
                 // entra na room
                 info.room = lastRoom;
                 lastRoom.player2 = info;
+
+                players_id.push(info.room.player2.playerID)
                 
+
                 lastRoom = null; 
             } 
             else {
@@ -62,9 +68,11 @@
                     player2: null
                 }
                 rooms[roomno] = lastRoom;
-                
                 roomno++;
                 info.room = lastRoom;
+
+                players_id.push(info.room.player1.playerID)
+                
             }
     
         })  
@@ -87,7 +95,7 @@
         })
 
 
-        socket.on('connecting_players', () => {
+        socket.on('PLAYERS_DATA', () => {
             let info = player_info[socket.id];
             if (!info) {
                 // hacker! :)
@@ -98,30 +106,37 @@
                 // hacker 2 :)
                 return;
             }
-            if (info.room.player1 === info) {
-                // * Player1
-                let player2 = info.room.player2
-                let player1 = info.room.player1
 
-                socket.emit('OponentData', player2.playerID, player2.character, player2.x, player2.y, player2.nome)
-                socket.emit('CurrentPlayerData', player1.playerID, player1.character, player1.x, player1.y, player1.nome)
-                // manda algo para o player2 +- assim
-                //room.player2.socket.send.... 
+            // Sending both players ID's
+            socket.emit('PlayerInRoom' , players_id)
+            
+            if (info.room.player2 === info) {
                 
+                let player_2 = {
+                    x: info.room.player2.x,
+                    y: info.room.player2.y,
+                    life: info.room.player2.life,
+                    character: info.room.player2.character,
+                    id: info.room.player2.playerID,
+                    nome: info.room.player2.nome
+                }
+                socket.emit('PlayerData', player_2)
                 
             } 
             else {
-                // * Player2
-
-                let player1 = info.room.player1
-                let player2 = info.room.player2
-
-                socket.emit('OponentData', player1.playerID, player1.character, player1.x, player1.y, player1.nome)
-                socket.emit('CurrentPlayerData', player2.playerID, player2.character, player2.x, player2.y, player2.nome)
-                // manda algo para o player1 +- assim
-                //room.player1.socket.send....
+                let player_1 = {
+                    x: info.room.player1.x,
+                    y: info.room.player1.y,
+                    life: info.room.player1.life,
+                    character: info.room.player1.character,
+                    id: info.room.player1.playerID,
+                    nome: info.room.player1.nome
+                }
+                socket.emit('PlayerData', player_1)
             }
         });
+
+
        // Event for when a player disconnects
         socket.on('disconnect', function () {
 

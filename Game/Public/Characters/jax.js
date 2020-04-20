@@ -1,8 +1,8 @@
-class Tommy extends Phaser.Physics.Arcade.Sprite{
+class Jax extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene, x, y){
 
-        super(scene, x, y, 'Tommy', 'Tommy_01.png')
+        super(scene, x, y, 'Jax', 'SpriteSheetJax_01.png')
 
         this.scene.add.existing(this)
         
@@ -13,8 +13,8 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
             key: "walk",
             repeat: -1,
             frameRate: 6,
-            frames: this.scene.anims.generateFrameNames('Tommy', {
-                prefix: 'Tommy_',
+            frames: this.scene.anims.generateFrameNames('Jax', {
+                prefix: 'SpriteSheetJax_',
                 suffix: ".png",
                 start: 7,
                 end: 10,
@@ -25,10 +25,9 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
         //JAB
         this.scene.anims.create({
             key: "jab",
-            
             frameRate: 4,
-            frames: this.scene.anims.generateFrameNames('Tommy', {
-                prefix: 'Tommy_',
+            frames: this.scene.anims.generateFrameNames('Jax', {
+                prefix: 'SpriteSheetJax_',
                 suffix: ".png",
                 start: 5,
                 end: 6,
@@ -38,11 +37,10 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
 
         // DIRETO
         this.scene.anims.create({
-            key: "direto",
-            
+            key: "direto",           
             frameRate: 4,
-            frames: this.scene.anims.generateFrameNames('Tommy', {
-                prefix: 'Tommy_',
+            frames: this.scene.anims.generateFrameNames('Jax', {
+                prefix: 'SpriteSheetJax_',
                 suffix: ".png",
                 start: 1,
                 end: 2,

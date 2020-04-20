@@ -140,21 +140,13 @@ class Boot extends Phaser.Scene {
 
             // Sprites
                 // Tommy
-<<<<<<< HEAD
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/TommySprite.png", 'Assets/Sprites/JSON/Tommy.json')
-
                 // Jax
-                this.load.atlas('Jax', "Assets/Sprites/Spritesheet/JaxSprite.png", 'Assets/Sprites/JSON/Jax.json')
-                
-                
-                
-=======
-                this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/sprites.png", 'Assets/Sprites/JSON/sprites.json')
+                this.load.atlas("Jax", "Assets/Sprites/Spritesheet/JaxSprite.png", 'Assets/Sprites/JSON/Jax.json')
         
 
         
  
->>>>>>> SocketImp
     }
 
     create() {

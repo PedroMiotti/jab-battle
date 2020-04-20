@@ -75,6 +75,7 @@ class TelaChooseChar extends Phaser.Scene{
         .setInteractive()
         .on('pointerdown', () => {
             
+            
             this.socketEvents(this.nomePlayer, this.chosenChar)
             this.scene.start('TelaEncJogador')
                  
