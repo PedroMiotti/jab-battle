@@ -4,7 +4,7 @@ class Boot extends Phaser.Scene {
     }
 
     preload() {
-        
+        // ------------- Loading Screen
         let progressBar = this.add.graphics();
         let progressBox = this.add.graphics();
         progressBox.fillStyle(0x222222, 0.8);
@@ -70,6 +70,7 @@ class Boot extends Phaser.Scene {
         for (let i = 0; i < 800; i++) {
             this.load.image('logo'+i, 'Assets/UI/Logo.png');
         }
+        // -------------
             // Tela Inicial 
 
             // Background
@@ -91,7 +92,35 @@ class Boot extends Phaser.Scene {
         // Tela Escolher jogador
 
             // Background
-            this.load.image('telachooseCharBG', 'Assets/img/TelaChooseChar.png')
+            this.load.image('telachooseCharBG', 'Assets/img/TelaChooseChar1.png')
+
+            // Fight Button
+            this.load.image('FightButtonBig', "Assets/UI/FightButtonBig.png" )
+
+            // Botao Voltar
+            this.load.image('botaoVoltarBig', 'Assets/UI/BackButtonBig.png')
+            
+            // Characters Images
+                // Tommy
+                this.load.image('TommyBtt', '/Assets/UI/ChooseCharBtt/TommyBTT.png') // Buttons
+                this.load.image('TommyIMG', 'Assets/UI/ChooseCharIMG/TommyIMG.png') // IMG
+                
+                // Jax
+                this.load.image('JaxBtt', '/Assets/UI/ChooseCharBtt/JaxBTT.png') // Buttons
+                this.load.image('JaxIMG', 'Assets/UI/ChooseCharIMG/JaxIMG.png') // IMG
+
+                // Rut
+                this.load.image('DigaraBtt', '/Assets/UI/ChooseCharBtt/RutBTT.png') // Buttons
+                this.load.image('DigaraIMG', 'Assets/UI/ChooseCharIMG/DigaraIMG.png') // IMG
+
+                // Cascao
+                this.load.image('CascaoBtt', '/Assets/UI/ChooseCharBtt/CascaoBTT.png') // Buttons
+                this.load.image('CascaoIMG', 'Assets/UI/ChooseCharIMG/CascaoIMG.png') // IMG
+
+                // Spidinho
+                this.load.image('SpidinhoBtt', '/Assets/UI/ChooseCharBtt/SpidinhoBTT.png') // Buttons
+                this.load.image('SpidinhoIMG', 'Assets/UI/ChooseCharIMG/SpidinhoIMG.png') // IMG
+                
 
         // Tela Encontrando Jogador
             // Background

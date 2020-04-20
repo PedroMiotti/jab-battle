@@ -31,24 +31,17 @@ class TelaNome extends Phaser.Scene {
         .on('pointerdown', () => {
 
             // Getting the value of the text box
-            this.inputBoxValue = this.textBox.value
-            this.socketEvents(this.inputBoxValue)
-
+            this.inputBoxValue = document.getElementById('nameBox').value
+            
             // Hidding textBox
             this.textBox.style.display = "none"
-            this.scene.start('TelaChooseChar')
-            // this.scene.start('telaRingue')           
+
+
+            this.scene.start('TelaChooseChar',  {nome: this.inputBoxValue})          
         })
 
     }
 
-     // Funcao para tratar os eventos do Socket
-     socketEvents(nome_player){
-        
-        // Mandando o nome do jogador para o objeto player_info
-       socket.emit('info_player',  nome_player)
-    
-   }
 
 }
 

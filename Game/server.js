@@ -31,13 +31,13 @@
 
         console.log('User connected Id : ' + socket.id)
 
-        socket.on('info_player', (nome_player) =>{
+        socket.on('info_player', (nome_player, chosen_char) =>{
 
             let info = {
                 x: 100,
                 y: 310,
                 life: 100,
-                character: 'tommy', // TODO add 'chosenChar' to the params to receive the chosenCharacter from the chooseChar screen
+                character: chosen_char, 
                 playerID: socket.id,
                 socket: socket,
                 nome: nome_player,
