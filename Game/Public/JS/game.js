@@ -19,6 +19,7 @@ const config = {
 
   // Phaser Instance
   const game = new Phaser.Game(config, connectToSocket());
+  // let player = null
 
 
 

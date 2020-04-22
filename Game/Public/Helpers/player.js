@@ -1,7 +1,7 @@
 
 class Player extends Phaser.Physics.Arcade.Sprite {
  
-    constructor(scene,id, x, y, character, life){
+    constructor(scene, id, x, y, character, life){
         super(scene,'Player')
 
         this.id = id
@@ -15,9 +15,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         this.life = life
 
-        
 
-        this.handleCharacterChoosing(character ,this.spawn.x, this.spawn.y)
+        this.handleCharacterChoosing(scene ,character ,this.spawn.x, this.spawn.y)
+
     }
 
     create(){
@@ -64,24 +64,29 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     // }
 
-    handleCharacterChoosing(character, x , y){
+    handleCharacterChoosing(scene, character, x , y){
         // Adding Characters
-        this.chosenChar = character //TODO - Pegar do socket.info
+        this.chosenChar = character 
         this.fighter = null
         
-        if(this.chosenChar == 'Tommy'){
-            this.fighter = this.physics.add.existing(new Tommy(this, x, y))
+        if(this.chosenChar == 'Tommy'){          
+            this.fighter = this.scene.physics.add.existing(new Tommy(scene, x, y))
         }
         else if(this.chosenChar == 'Jax'){
-            this.fighter = this.physics.add.existing(new Jax(this, x, y) )
+            this.fighter = this.scene.physics.add.existing(new Jax(scene, x, y))
         }
 
         // TODO add all other character HERE
 
-
-        this.fighter.scene.setCollideWorldBounds(true);
+        
         this.scene.physics.add.collider(this.fighter) 
-        this.scene.physics.world.enable(this.fighter)
+        this.scene.physics.world.enableBody(this.fighter)
+        // debugger
+        this.fighter.setCollideWorldBounds(true)
+
+
+        
+       
 
     }
 }

@@ -18,6 +18,18 @@ class TelaEncJogador extends Phaser.Scene {
         this.ponto2 = this.add.image(675, 150, 'ponto')
         this.ponto3 = this.add.image(695, 150, 'ponto')
 
+        // Luva Azul
+        this.luvaAzul = this.add.image(1150,385, 'LuvaAzul')
+        // Fade in
+        this.tween = this.tweens.add({
+            targets: this.luvaAzul,
+            x: 860,
+            ease: 'Power1',
+            duration: 1500,
+            paused: true,
+        })
+
+
          // Setting dots to hide
          this.ponto2.visible = false
          this.ponto3.visible = false
@@ -43,14 +55,15 @@ class TelaEncJogador extends Phaser.Scene {
             this.player_2 = player2
             if(this.player_2 !== null){
 
-                //TODO ----- Add Fading Animation
-                this.add.image(860,385, 'LuvaAzul')
+                // Playing the blue glove animation
+                this.tween.play()
+            
                 //TODO ----- Play FIGHT sfx
 
                 setTimeout(() => {
                     this.scene.start('telaRingue')
                     this.scene.stop()
-                },1000)
+                },3000)
                 
             }
         })

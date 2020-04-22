@@ -71,7 +71,7 @@
                 roomno++;
                 info.room = lastRoom;
 
-                players_id.push(info.room.player1.playerID)
+                players_id.push(info.room.player1.playerID) //! Its adding all the players to this array - FIX IT
                 
             }
     
@@ -109,6 +109,7 @@
 
             // Sending both players ID's
             socket.emit('PlayerInRoom' , players_id)
+            // console.log(players_id)
             
             if (info.room.player2 === info) {
                 
@@ -158,6 +159,7 @@
                 if (room.player1 && room.player1 !== info) {
                     // o player saindo era o player2
                     // avisa room.player1 que acabou o jogo!
+                    // TODO - create an event to display something at the screen when a player leaves
                 } else if (room.player2 && room.player2 !== info) {
                     // o player saindo era o player1
                     // avisa room.player2 que acabou o jogo!
