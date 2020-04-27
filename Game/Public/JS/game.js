@@ -19,7 +19,9 @@ const config = {
 
   // Phaser Instance
   const game = new Phaser.Game(config, connectToSocket());
-  // let player = null
+  let player = null
+  let oponent = null
+  let telaRingue = null
 
 
 

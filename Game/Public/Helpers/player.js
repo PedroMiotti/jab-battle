@@ -64,21 +64,24 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     // }
 
-    handleCharacterChoosing(scene, character, x , y){
+    handleCharacterChoosing(scene1, character, x , y){
         // Adding Characters
         this.chosenChar = character 
         this.fighter = null
         
         if(this.chosenChar == 'Tommy'){          
-            this.fighter = this.scene.physics.add.existing(new Tommy(scene, x, y))
+            this.fighter = this.scene.physics.add.existing(new Tommy(scene1, x, y))
+            // this.fighter = new Tommy(scene1, x, y)
+
         }
         else if(this.chosenChar == 'Jax'){
-            this.fighter = this.scene.physics.add.existing(new Jax(scene, x, y))
+            this.fighter = this.scene.physics.add.existing(new Jax(scene1, x, y))
+            // this.fighter = new Jax(scene1, x, y)
+
         }
 
         // TODO add all other character HERE
 
-        
         this.scene.physics.add.collider(this.fighter) 
         this.scene.physics.world.enableBody(this.fighter)
         // debugger

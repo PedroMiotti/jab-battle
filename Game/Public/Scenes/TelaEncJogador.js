@@ -14,9 +14,37 @@ class TelaEncJogador extends Phaser.Scene {
         this.background.setOrigin(0, 0)
 
         // Ponto
-        this.ponto1 = this.add.image(655, 150, 'ponto')
-        this.ponto2 = this.add.image(675, 150, 'ponto')
-        this.ponto3 = this.add.image(695, 150, 'ponto')
+        // this.ponto1 = this.add.image(655, 150, 'ponto')
+        // this.ponto2 = this.add.image(675, 150, 'ponto')
+        // this.ponto3 = this.add.image(695, 150, 'ponto')
+        // let pontos = this.add.group(655, 150, {key: 'ponto', repeat: 107})
+
+        // let _this = this;
+
+        // let i = 0;
+    
+        // pontos.children.iterate(function (child) {
+    
+        //     _this.tweens.add({
+        //         targets: child,
+        //         scaleX: 1,
+        //         scaleY: 1,
+        //         ease: 'Sine.easeInOut',
+        //         duration: 300,
+        //         delay: i * 50,
+        //         repeat: -1,
+        //         yoyo: true,
+        //         repeatDelay: 500
+        //     });
+    
+        //     i++;
+    
+        //     if (i % 3 === 0)
+        //     {
+        //         i = 0;
+        //     }
+    
+        // });
 
         // Luva Azul
         this.luvaAzul = this.add.image(1150,385, 'LuvaAzul')
@@ -29,10 +57,6 @@ class TelaEncJogador extends Phaser.Scene {
             paused: true,
         })
 
-
-         // Setting dots to hide
-         this.ponto2.visible = false
-         this.ponto3.visible = false
 
         // Botao Voltar
         this.botaoJogar = this.add.image(512,650, 'botaoVoltar')
@@ -63,7 +87,7 @@ class TelaEncJogador extends Phaser.Scene {
                 setTimeout(() => {
                     this.scene.start('telaRingue')
                     this.scene.stop()
-                },3000)
+                },1500)
                 
             }
         })

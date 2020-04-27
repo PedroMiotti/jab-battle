@@ -5,7 +5,7 @@ class TelaRingue extends Phaser.Scene {
      
 
     create(){
-        
+        telaRingue = this
         // Setting Background
         this.background = this.add.image(0, 0, 'telaringueBG')
         this.background.setOrigin(0, 0)
@@ -13,21 +13,26 @@ class TelaRingue extends Phaser.Scene {
         this.initPlayers()
         // Inicializando Jogadores
         //? Data = players.info
+
+        let _this = this
+
         socket.on('PlayerData', (data) => { 
             
-            this.players.forEach(function(i) {
+            _this.players.forEach(function(i) {
                 
                 if(i === data.id){
 
-                    this.player = new Player(this, data.id, data.x, data.y, data.character, data.life)  
-
+                    player = this.physics.add.existing(new Player(_this, data.id, data.x, data.y, data.character, data.life))  
+                    
+                    
                 }
                 else {
 
-                    this.oponent = 'Oponente Here'
+                    // oponent = new Oponent(_this, data.id, data.x, data.y, data.character, data.life)
+                    return
 
                 }
-            }, this)
+            })
             
         })
         
@@ -41,7 +46,7 @@ class TelaRingue extends Phaser.Scene {
     }
 
     initPlayers(){
-        // let _self = this
+        
         
         this.players = new Array()
         
