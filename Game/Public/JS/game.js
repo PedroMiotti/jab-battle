@@ -21,6 +21,23 @@ const config = {
   const game = new Phaser.Game(config, connectToSocket());
 
 
+  let player = null
+  let oponent = null
+  let telaRingue = null
+
+
+  let players = new Array()
+  let playersInfo = new Object()
+
+//   // ADDING KEYS
+//   let keys = game.input.keyboard.addKeys({
+//     jab:Phaser.Input.Keyboard.KeyCodes.W,
+//     direto:Phaser.Input.Keyboard.KeyCodes.S,
+//     left:Phaser.Input.Keyboard.KeyCodes.A,
+//     right:Phaser.Input.Keyboard.KeyCodes.D
+// })
+
+
 
   //  Funcao para connectar o client to the socket
   function connectToSocket(){

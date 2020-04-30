@@ -4,6 +4,7 @@ class Jax extends Phaser.Physics.Arcade.Sprite{
 
         super(scene, x, y, 'Jax', 'SpriteSheetJax_01.png')
 
+        
         this.scene.add.existing(this)
         
         // ANIMATIONS

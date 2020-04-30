@@ -4,6 +4,7 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
 
         super(scene, x, y, 'Tommy', 'Tommy_01.png')
 
+        
         this.scene.add.existing(this)
         
         // ANIMATIONS
@@ -24,8 +25,7 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
 
         //JAB
         this.scene.anims.create({
-            key: "jab",
-            
+            key: "jab",            
             frameRate: 4,
             frames: this.scene.anims.generateFrameNames('Tommy', {
                 prefix: 'Tommy_',
@@ -38,8 +38,7 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
 
         // DIRETO
         this.scene.anims.create({
-            key: "direto",
-            
+            key: "direto",      
             frameRate: 4,
             frames: this.scene.anims.generateFrameNames('Tommy', {
                 prefix: 'Tommy_',
