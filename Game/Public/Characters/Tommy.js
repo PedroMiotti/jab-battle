@@ -5,7 +5,7 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
         super(scene, x, y, 'Tommy', 'Tommy_01.png')
 
         
-        // this.scene.physics.add.existing(this)
+        this.scene.add.existing(this)
         
         // ANIMATIONS
 

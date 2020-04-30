@@ -5,67 +5,82 @@ class TelaRingue extends Phaser.Scene {
      
 
     create(){
-        telaRingue = this
         // Setting Background
         this.background = this.add.image(0, 0, 'telaringueBG')
         this.background.setOrigin(0, 0)
-
-        this.initPlayers()
-        // Inicializando Jogadores
-        //? Data = players.info
-
-        let _this = this
-
-        socket.on('PlayerData', (data) => { 
-            
-            _this.players.forEach(function(i) {
-                
-                if(i === data.id){
-
-                    player = this.physics.add.existing(new Player(_this, data.id, data.x, data.y, data.character, data.life))  
-                    
-                    
-                }
-                else {
-
-                    // oponent = new Oponent(_this, data.id, data.x, data.y, data.character, data.life)
-                    return
-
-                }
-            })
-            
-        })
         
-             
-
+        this.socketEvents()
+        this.initPlayers()
+        
     }
 
     update(){    
+
         // Player.handleMoving()
-        
+
     }
 
-    initPlayers(){
-        
-        
-        this.players = new Array()
-        
+    socketEvents(){
         socket.emit('PLAYERS_DATA')
 
         // ID's in room
         socket.on('PlayerInRoom', (dataID) => {
             
             // Both players [ID's]
-            this.players = [
+            players = [
                 dataID[0],
                 dataID[1]
             ]
 
         })
+
+        socket.on('PlayerData', (data) => { 
+            
+            playersInfo.id = data.id;
+            playersInfo.x = data.x;
+            playersInfo.y = data.y;
+            playersInfo.character = data.character;
+            playersInfo.life = data.life;
+            
+            
+        })
+
     }
 
+    initPlayers(){
+        let _this = this
+        players.forEach(function(i) {
+            
+            if(i === playersInfo.id){
+                
+                player = new Player(_this, playersInfo.id,playersInfo.x,playersInfo.y,playersInfo.character,playersInfo.life)
+                
+            }
+            else {
 
+                // oponent = new Oponent(_this, data.id, data.x, data.y, data.character, data.life)
+                return
 
-
+            }
+        })
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
