@@ -49,6 +49,20 @@ class Tommy extends Phaser.Physics.Arcade.Sprite{
             })
         })
 
+        // IDLE
+        this.scene.anims.create({
+            key: "idle",           
+            frameRate: 4,
+            repeat: -1,
+            frames: this.scene.anims.generateFrameNames('Tommy', {
+                prefix: 'Tommy_',
+                suffix: ".png",
+                start: 1,
+                end: 1,
+                zeroPad: 2,
+            })
+        })
+
     }
 
 

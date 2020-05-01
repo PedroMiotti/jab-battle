@@ -7,7 +7,7 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         this.id = id
         this.spawn = {
             x: 650, 
-            y: 630
+            y: 600
         }
         this.previousPosition = {
             x: x, 
@@ -19,11 +19,6 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         this.handleCharacterChoosing(scene ,character ,this.spawn.x, this.spawn.y)
 
     }
-
-    create(){
-        return
-    }
-
 
     handleCharacterChoosing(scene, character, x , y){
         // Adding Characters

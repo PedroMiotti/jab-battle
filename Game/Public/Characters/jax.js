@@ -17,8 +17,8 @@ class Jax extends Phaser.Physics.Arcade.Sprite{
             frames: this.scene.anims.generateFrameNames('Jax', {
                 prefix: 'SpriteSheetJax_',
                 suffix: ".png",
-                start: 7,
-                end: 10,
+                start: 1,
+                end: 4,
                 zeroPad: 2,
             })
         })
@@ -43,8 +43,22 @@ class Jax extends Phaser.Physics.Arcade.Sprite{
             frames: this.scene.anims.generateFrameNames('Jax', {
                 prefix: 'SpriteSheetJax_',
                 suffix: ".png",
+                start: 7,
+                end: 8,
+                zeroPad: 2,
+            })
+        })
+
+        // IDLE
+        this.scene.anims.create({
+            key: "idle",           
+            frameRate: 4,
+            repeat: -1,
+            frames: this.scene.anims.generateFrameNames('Jax', {
+                prefix: 'SpriteSheetJax_',
+                suffix: ".png",
                 start: 1,
-                end: 2,
+                end: 1,
                 zeroPad: 2,
             })
         })

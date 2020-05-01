@@ -6,7 +6,7 @@ class TelaChooseChar extends Phaser.Scene{
 
     create(data){
         this.nomePlayer = data.nome // Getting player's name from the TelaNome
-        this.chosenChar = "Tommy"
+        this.chosenChar = "Tommy" // Default
         
         // Setting Background
         this.background = this.add.image(0, 0 , 'telachooseCharBG')

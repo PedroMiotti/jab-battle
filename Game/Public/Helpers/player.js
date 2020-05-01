@@ -6,8 +6,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.id = id
         this.spawn = {
-            x: 275, 
-            y: 600
+            x: 235, 
+            y: 575
         }
         this.previousPosition = {
             x: x, 
@@ -18,24 +18,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.handleCharacterChoosing(scene ,character ,this.spawn.x, this.spawn.y)
 
-    }
-
-    create(){
-        // ADDING KEYS
-        this.keys = game.input.keyboard.addKeys({
+        
+        this.keys = scene.input.keyboard.addKeys({
             jab:Phaser.Input.Keyboard.KeyCodes.W,
             direto:Phaser.Input.Keyboard.KeyCodes.S,
             left:Phaser.Input.Keyboard.KeyCodes.A,
             right:Phaser.Input.Keyboard.KeyCodes.D
-        })
-
-        
-        
-    }
-
-    update(){
-
-        this.handleMoving()
+          })
 
     }
 
@@ -45,20 +34,21 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         
         if (this.keys.left.isDown){
             this.fighter.anims.play('walk', true)
+            console.log('LEFT')
             this.fighter.setVelocityX(-160)
         }
 
     
         else if(this.keys.right.isDown){
 
-            this.fighter.setVelocityX(160)
+            this.fighter.setVelocityX(160) 
             this.fighter.anims.play('walk', true)
 
         }
 
         else{
             this.fighter.setVelocityX(0)
-            this.fighter.anims.play('idle')
+            this.fighter.anims.play('idle', true)
 
         }
 

@@ -11,12 +11,15 @@ class TelaRingue extends Phaser.Scene {
         
         this.socketEvents()
         this.initPlayers()
+
         
     }
 
     update(){    
-
-        // Player.handleMoving()
+        if(player != null){
+            player.handleMoving()
+        }
+        
 
     }
 

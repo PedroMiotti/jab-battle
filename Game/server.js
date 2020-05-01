@@ -109,7 +109,6 @@
 
             // Sending both players ID's
             socket.emit('PlayerInRoom' , players_id)
-            // console.log(players_id)
             
             if (info.room.player2 === info) {
                 
