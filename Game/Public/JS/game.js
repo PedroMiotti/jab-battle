@@ -21,11 +21,16 @@ const config = {
   const game = new Phaser.Game(config, connectToSocket());
 
   // Global Variables
-  let player = null
-  let oponent = null
+  let player = null // Entitie
+  let oponent = null // Entitie
 
-  let players = new Array()
-  let playersInfo = new Object()
+  let pID = null // Player ID
+  let p1ID = null // First Player ID
+
+  let players = new Array() // Players ID's
+  let player1 = new Object() // Player 1 info
+  let player2 = new Object() // Player 2 info
+
 
 
   //  Funcao para connectar o client to the socket

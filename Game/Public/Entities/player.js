@@ -7,7 +7,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.id = id
         this.spawn = {
             x: 235, 
-            y: 575
+            y: 555
         }
         this.previousPosition = {
             x: x, 
@@ -83,7 +83,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.scene.physics.add.collider(this.fighter) 
         this.scene.physics.world.enable(this.fighter)
-        // debugger
         this.fighter.setCollideWorldBounds(true)
 
     }

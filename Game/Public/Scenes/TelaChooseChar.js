@@ -89,7 +89,7 @@ class TelaChooseChar extends Phaser.Scene{
         
         // Mandando o nome do jogador para o objeto player_info
        socket.emit('info_player',  nome_player, chosen_char)
-       
+
     
    }
 
