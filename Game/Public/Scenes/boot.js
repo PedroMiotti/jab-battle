@@ -1,3 +1,5 @@
+"use strict";
+
 class Boot extends Phaser.Scene {
     constructor(){
         super('boot')

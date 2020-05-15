@@ -1,3 +1,5 @@
+"use strict";
+
 class Tommy extends Phaser.Physics.Arcade.Sprite{
 
     constructor(scene, x, y){

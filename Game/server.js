@@ -1,181 +1,151 @@
 // IMPORTS
-    // Express
-        const express = require(`express`)
-        const app = express()
+// Express
+const express = require(`express`);
+const app = express();
 
-    // Socket.io
-        const server = require('http').Server(app)
-        const io = require('socket.io').listen(server)
-
+// Socket.io
+const server = require("http").Server(app);
+const io = require("socket.io").listen(server);
 
 // CONFIG
-    // MIDDLEWARES
-        app.use(express.static(__dirname + '/Public')) // Using the Public folder as the static folder
-        
-
-
+// MIDDLEWARES
+app.use(express.static(__dirname + "/Public")); // Using the Public folder as the static folder
 
 // Socket.io
 
-    let roomno = 1
+let roomno = 1;
 
-    // Object for the player's info
-    let player_info = {}    
+// Object for the player's info
+let player_info = {};
 
-    // Players ID in room
-    let players_id = []
+let rooms = {};
 
-    let rooms = {}
+let lastRoom = null;
 
-    let lastRoom = null
+// Event for when a new player connects
+io.on("connection", function (socket) {
+	console.log(`User connected, Id : ${socket.id} 😄`);
+	const id = socket.id;
 
-       
-    // Event for when a new player connects 
-    io.on('connection', function (socket) {
+	socket.on("info_player", (nome, character) => {
+		let info = {
+			x: 0,
+			y: 0,
+			life: 100,
+			character: character,
+			id: socket.id,
+			socket: socket,
+			nome: nome,
+			room: null
+		};
 
-        console.log(`User connected, Id : ${socket.id} 😄` )
-        const id = socket.id
-        
+		player_info[socket.id] = info;
 
-        socket.on('info_player', (nome_player, chosen_char) =>{
+		// Segundo jogador
+		if (lastRoom) {
+            // entra na room
+            // spawn 2
+            info.x = 780;
+            info.y = 555;
+			info.room = lastRoom;
+			lastRoom.player2 = info;
 
-            let info = {
-                x: 100,
-                y: 310,
-                life: 100,
-                character: chosen_char, 
-                playerID: socket.id,
-                socket: socket,
-                nome: nome_player,
-                room: null
-            };
+			var gameStartData = {
+				roomId: lastRoom.id,
+				player1: {
+					id: lastRoom.player1.id,
+                    nome: lastRoom.player1.nome,
+                    character: lastRoom.player1.character,
+                    x: lastRoom.player1.x,
+                    y: lastRoom.player1.y,
+                    life: lastRoom.player1.life
+				},
+				player2: {
+					id: lastRoom.player2.id,
+					nome: lastRoom.player2.nome,
+					character: lastRoom.player2.character,
+                    x: lastRoom.player2.x,
+                    y: lastRoom.player2.y,
+                    life: lastRoom.player2.life
+				}
+			};
 
-            player_info[socket.id] = info;
+			lastRoom.player1.socket.emit("game_started", gameStartData);
+			lastRoom.player2.socket.emit("game_started", gameStartData);
 
-            // Segundo jogador
-            if (lastRoom) {
-                // entra na room
-                info.room = lastRoom;
-                lastRoom.player2 = info;
+			lastRoom = null;
+		} else {
+			// esse era o primeiro player na room
+            // spawn 1
+            info.x = 235;
+			info.y = 555;
+            lastRoom = {
+				id: roomno,
+				player1: info,
+				player2: null
+			};
+			rooms[roomno] = lastRoom;
+			roomno++;
+			info.room = lastRoom;
+		}
+	});
 
-                players_id.push(info.room.player2.playerID)
-                
+	socket.on("player_data", (player_data) => {
+		let info = player_info[socket.id];
+		if (!info) {
+			console.log("!info");
+			return;
+		}
 
-                lastRoom = null; 
-            } 
-            else {
-                // esse era o primeiro player na room
-                lastRoom = {
-                    id: roomno,
-                    player1: info,
-                    player2: null
-                }
-                rooms[roomno] = lastRoom;
-                roomno++;
-                info.room = lastRoom;
+        let room = info.room;
+		if (!room) {
+			console.log("!info.room");
+			return;
+		}
 
-                players_id.push(info.room.player1.playerID) //! Its adding all the players to this array - FIX IT
-                
-            }
-    
-        })  
-        
-        // * Vendo se o player 2 ja se conectou e enviando players_info
-        socket.on('checkPlayer2', () => {
-            let info = player_info[socket.id]
-        
-            if (info.room.player2 === null) {
+		if (room.player1 === info) {
+			// Informação está vindo do player1, então deve ser encaminhada para o 2
+			room.player2.emit("player_data", player_data);
+		} else {
+			room.player1.emit("player_data", player_data);
+		}
+	});
 
-                socket.emit("check_player2", null);
+	// Event for when a player disconnects
+	socket.on("disconnect", function () {
+		console.log(`User disconnected ${socket.id}`);
 
-            } 
+		let info = player_info[socket.id];
+		if (!info) {
+			// Por algum motivo bizarro, esse socket nao tinha nem um player_info...
+			return;
+		}
 
-            else {
-                let player_1 = {
-                    x: info.room.player1.x,
-                    y: info.room.player1.y,
-                    life: info.room.player1.life,
-                    character: info.room.player1.character,
-                    id: info.room.player1.playerID,
-                    nome: info.room.player1.nome
-                }
+		info.socket = null; // garbage collector!
+		delete player_info[socket.id];
+		let room = info.room;
+		info.room = null;
 
-                let player_2 = {
-                    x: info.room.player2.x,
-                    y: info.room.player2.y,
-                    life: info.room.player2.life,
-                    character: info.room.player2.character,
-                    id: info.room.player2.playerID,
-                    nome: info.room.player2.nome
-                }
-
-                socket.emit('check_player2', {p1: player_1, p2: player_2})
-
-            
-            }
-
-        })
-
-        
-
-        socket.on('PLAYERS_DATA', () => {
-            let info = player_info[socket.id];
-            if (!info) {
-                // hacker! :)
-                return;
-            }
-             
-            if (!info.room) {
-                // hacker 2 :)
-                return;
-            }
-
-            // Sending both players ID's
-            socket.emit('PlayerInRoom' , players_id)
-            socket.emit('player_id', id)
-
-        });
-
-
-       // Event for when a player disconnects
-        socket.on('disconnect', function () {
-
-            console.log('User disconnected')
-
-            let info = player_info[socket.id];
-            if (!info) {
-                // Por algum motivo bizarro, esse socket nao tinha nem um player_info...
-                return;
-            }
-
-            info.socket = null;// garbage collector!
-            delete player_info[socket.id]; 
-            let room = info.room;
-            info.room = null; 
-     
-            if (room) {
-                delete rooms[room.id];
-                if (room.player1 && room.player1 !== info) {
-                    // o player saindo era o player2
-                    // avisa room.player1 que acabou o jogo!
-                    // TODO - create an event to display something at the screen when a player leaves
-                } else if (room.player2 && room.player2 !== info) {
-                    // o player saindo era o player1
-                    // avisa room.player2 que acabou o jogo!
-                }
-                room.player1 = null; //  garbage collector!
-                room.player2 = null; //  garbage collector!
-            }
-
-        })
-
-      })
-  
+		if (room) {
+			delete rooms[room.id];
+			if (room.player1 && room.player1 !== info) {
+				// o player saindo era o player2
+				// avisa room.player1 que acabou o jogo!
+				// TODO - create an event to display something at the screen when a player leaves
+			} else if (room.player2 && room.player2 !== info) {
+				// o player saindo era o player1
+				// avisa room.player2 que acabou o jogo!
+			}
+			room.player1 = null; //  garbage collector!
+			room.player2 = null; //  garbage collector!
+		}
+	});
+});
 
 // PORT CONFIG
-    const PORT = process.env.PORT || 2000
-    server.listen(PORT, () => {
+const PORT = process.env.PORT || 2000;
 
-        console.log(`Servidor OK \n Port : ${PORT}`)
-
-    })
+// server.listen(2000, '192.168.0.107');
+server.listen(PORT, () => {
+	console.log(`Servidor OK \n Port : ${PORT}`);
+});

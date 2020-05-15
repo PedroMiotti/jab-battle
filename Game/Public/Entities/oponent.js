@@ -1,3 +1,4 @@
+"use strict";
 
 class Oponent extends Phaser.Physics.Arcade.Sprite {
  
@@ -6,8 +7,8 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
 
         this.id = id
         this.spawn = {
-            x: 780, 
-            y: 555
+            x: x, 
+            y: y
         }
         this.previousPosition = {
             x: x, 
@@ -38,7 +39,7 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.add.collider(this.fighter) 
         this.scene.physics.world.enableBody(this.fighter)
         this.fighter.setCollideWorldBounds(true)
-        this.fighter.flipX = true;
+        // this.fighter.flipX = true;
 
        
     }
