@@ -39,7 +39,12 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         this.scene.physics.add.collider(this.fighter) 
         this.scene.physics.world.enableBody(this.fighter)
         this.fighter.setCollideWorldBounds(true)
-        // this.fighter.flipX = true;
+
+        if(!localPlayerIs2){
+            this.fighter.flipX = true;
+        }
+        
+  
 
        
     }

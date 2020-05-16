@@ -66,5 +66,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		this.scene.physics.add.collider(this.fighter);
 		this.scene.physics.world.enable(this.fighter);
 		this.fighter.setCollideWorldBounds(true);
+
+		if(localPlayerIs2){
+            this.fighter.flipX = true;
+        }
 	}
 }

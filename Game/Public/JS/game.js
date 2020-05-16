@@ -61,17 +61,18 @@ function prepareSocket(nomePlayer, chosenChar) {
 	}
 
 	socket.on("game_started", (gameStartData) => {
-    started = true;
-    roomId = gameStartData.roomId;
+		started = true;
+		roomId = gameStartData.roomId;
 		if (gameStartData.player1.id === socket.id) {
-      localPlayerIs2 = false;
-      localPlayer = gameStartData.player1;
-      remotePlayer = gameStartData.player2;
-    } else {
-      localPlayerIs2 = true;
-      localPlayer = gameStartData.player2;
-      remotePlayer = gameStartData.player1;
-    }
+			localPlayerIs2 = false;
+			localPlayer = gameStartData.player1;
+			remotePlayer = gameStartData.player2;
+		} 
+		else {
+			localPlayerIs2 = true;
+			localPlayer = gameStartData.player2;
+			remotePlayer = gameStartData.player1;
+		}
 		gameStartedCallback();
 	});
 

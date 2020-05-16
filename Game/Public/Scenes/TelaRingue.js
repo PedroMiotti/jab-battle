@@ -14,9 +14,9 @@ class TelaRingue extends Phaser.Scene {
 	}
 
 	update() {
-		//if (player != null) {
-		//	player.handleMoving();
-		//}
+		if (player != null) {
+			player.handleMoving();
+		}
 	}
 
 	initPlayers() {
