@@ -16,7 +16,7 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         }
         this.life = life
 
-        this.fighter2 = null;
+        // this.fighter2 = null;
         this.prefix = null;
         this.animToPlay = null;
 
@@ -31,12 +31,12 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         let char_2 = remotePlayer.character;
 
         if(char_2 === "Tommy"){          
-            this.fighter2 = this.scene.physics.add.existing(new Tommy(scene2, x, y))
+            fighter2 = this.scene.physics.add.existing(new Tommy(scene2, x, y))
             this.prefix = "_tommy";
 
         }
         else if(char_2 === "Jax"){
-            this.fighter2 = this.scene.physics.add.existing(new Jax(scene2, x, y))
+            fighter2 = this.scene.physics.add.existing(new Jax(scene2, x, y))
             this.prefix = "_jax";
 
         }
@@ -44,22 +44,22 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         
         // TODO add all other character HERE
 
-        this.scene.physics.add.collider(this.fighter2) 
-        this.scene.physics.world.enableBody(this.fighter2)
-        this.fighter2.setCollideWorldBounds(true)
+        // this.scene.physics.add.collider(this.fighter2) 
+        this.scene.physics.world.enableBody(fighter2)
+        fighter2.setCollideWorldBounds(true)
         
         if(!localPlayerIs2){
-            this.fighter2.flipX = true;
+            fighter2.flipX = true;
         }
 
     }
 
     onMoveOpponent(x, y, anim){
-        this.fighter2.x = x;
-        this.fighter2.y = y;
+        fighter2.x = x;
+        fighter2.y = y;
 
         this.animToPlay = anim + this.prefix;
-        this.fighter2.anims.play(this.animToPlay, true);
+        fighter2.anims.play(this.animToPlay, true);
         
     }
 }

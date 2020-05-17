@@ -11,7 +11,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		};
 		this.life = life;
 
-		this.fighter = null;
+		// this.fighter = null;
 		this.prefix = null;
 		this.animToPlay = null;
 
@@ -23,34 +23,36 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 			left: Phaser.Input.Keyboard.KeyCodes.A,
 			right: Phaser.Input.Keyboard.KeyCodes.D
 		});
+
+		// this.setupBody(scene)
 	}
 
 	//? Call this function on the update on TelaRingue()
 	handleMoving() {
 		if (this.keys.left.isDown) {
 			this.animToPlay = "walk" + this.prefix;
-			this.fighter.anims.play(this.animToPlay, true);
+			fighter.anims.play(this.animToPlay, true);
 
-			this.fighter.setVelocityX(-160);
+			fighter.setVelocityX(-160);
 
-			socket.emit("key_press", "walk", { x: this.fighter.x, y: this.fighter.y });
+			socket.emit("key_press", "walk", { x: fighter.x, y: fighter.y });
 
 		} 
 		
 		else if (this.keys.right.isDown) {
 			this.animToPlay = "walk" + this.prefix;
-			this.fighter.anims.play(this.animToPlay, true);
+			fighter.anims.play(this.animToPlay, true);
 
-			this.fighter.setVelocityX(160);
+			fighter.setVelocityX(160);
 
-			socket.emit("key_press", "walk", { x: this.fighter.x, y: this.fighter.y });
+			socket.emit("key_press", "walk", { x: fighter.x, y: fighter.y });
 
 		} 
 		else if(this.keys.jab.isDown){
 		    this.animToPlay = "jab" + this.prefix;
-			this.fighter.anims.play(this.animToPlay, true);
+			fighter.anims.play(this.animToPlay, true);
 
-			socket.emit("key_press", "jab", { x: this.fighter.x, y: this.fighter.y });
+			socket.emit("key_press", "jab", { x: fighter.x, y: fighter.y });
 
 		    //TODO ----- Play PUNCH sfx
 
@@ -58,19 +60,19 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		else if(this.keys.direto.isDown){
 
 		    this.animToPlay = "direto" + this.prefix;
-			this.fighter.anims.play(this.animToPlay, true);
+			fighter.anims.play(this.animToPlay, true);
 
-			socket.emit("key_press", "direto", { x: this.fighter.x, y: this.fighter.y });
+			socket.emit("key_press", "direto", { x: fighter.x, y: fighter.y });
 
 		    //TODO ----- Play PUNCH sfx
 		}
 		
 		else {
 			this.animToPlay = "idle" + this.prefix;
-			this.fighter.anims.play(this.animToPlay, true);
-			this.fighter.setVelocityX(0);
+			fighter.anims.play(this.animToPlay, true);
+			fighter.setVelocityX(0);
 			
-			socket.emit("key_press", "idle", { x: this.fighter.x, y: this.fighter.y });
+			socket.emit("key_press", "idle", { x: fighter.x, y: fighter.y });
 
 
 		}
@@ -82,23 +84,48 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		let char_1 = localPlayer.character;
 
 		if (char_1 === "Tommy") {
-			this.fighter = this.scene.physics.add.existing(new Tommy(scene1, x, y));
+			fighter = this.scene.physics.add.existing(new Tommy(scene1, x, y));
 			this.prefix = "_tommy";
 		} 
 		else if (char_1 === "Jax") {
-			this.fighter = this.scene.physics.add.existing(new Jax(scene1, x, y));
+			fighter = this.scene.physics.add.existing(new Jax(scene1, x, y));
 			this.prefix = "_jax";
 		}
 		
 		// TODO add all other character HERE
 
-		this.scene.physics.add.collider(this.fighter);
-		this.scene.physics.world.enable(this.fighter);
-		this.fighter.setCollideWorldBounds(true);
+		// this.scene.physics.add.collider(this.fighter);
+		this.scene.physics.world.enable(fighter);
+		fighter.setCollideWorldBounds(true);
 		
 		
 		if(localPlayerIs2){
-            this.fighter.flipX = true;
+            fighter.flipX = true;
         }
 	}
+
+	setupBody(scene){
+
+		return
+
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

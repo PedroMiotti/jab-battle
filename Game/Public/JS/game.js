@@ -24,7 +24,10 @@ const game = new Phaser.Game(config);
 let player = null; // Entitie
 let oponent = null; // Entitie
 
-let moved = false;
+let fighter = null // Player's Physics Body
+let fighter2 = null // Opponent's Physics Body
+
+let moved = false; 
 
 let pID = null; // Player ID
 

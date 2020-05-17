@@ -140,11 +140,20 @@ class Boot extends Phaser.Scene {
             // Background 
             this.load.image('telaringueBG', 'Assets/img/TelaRingue.png')
 
+            // HUD
+                // LifeBar
+                this.load.image('lifeframe', 'Assets/UI/lifebarFinal2.png' )
+                // LifeBar FlipedX
+                this.load.image('lifeframe2', 'Assets/UI/lifebar2.png' )
+
             // Sprites
                 // Tommy
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/TommySprite.png", 'Assets/Sprites/JSON/Tommy.json')
                 // Jax
                 this.load.atlas("Jax", "Assets/Sprites/Spritesheet/JaxSprite.png", 'Assets/Sprites/JSON/Jax.json')
+
+            // Luvas
+                this.add.sprite("luvaTommy", "Assets/Sprites/Luvas/luvasTommy.png")
         
 
         
