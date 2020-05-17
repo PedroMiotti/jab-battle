@@ -16,24 +16,32 @@ class TelaRingue extends Phaser.Scene {
 	update() {
 		if (player != null) {
 			player.handleMoving();
+			
 		}
+
+		if(moved){
+			oponent.onMoveOpponent(remotePlayer.x, remotePlayer.y, remotePlayer.anim);
+			
+		}
+
 	}
 
 	initPlayers() {
 		player = new Player(
 			this,
 			localPlayer.id,
+			localPlayer.character,
 			localPlayer.x,
 			localPlayer.y,
-			localPlayer.character,
 			localPlayer.life
 		);
+		
 		oponent = new Oponent(
 			this,
 			remotePlayer.id,
+			remotePlayer.character,
 			remotePlayer.x,
 			remotePlayer.y,
-			remotePlayer.character,
 			remotePlayer.life
 		);
 	}

@@ -33,6 +33,7 @@ io.on("connection", function (socket) {
 			y: 0,
 			life: 100,
 			character: character,
+			animation: null,
 			id: socket.id,
 			socket: socket,
 			nome: nome,
@@ -50,12 +51,13 @@ io.on("connection", function (socket) {
 			info.room = lastRoom;
 			lastRoom.player2 = info;
 
-			var gameStartData = {
+			let gameStartData = {
 				roomId: lastRoom.id,
 				player1: {
 					id: lastRoom.player1.id,
                     nome: lastRoom.player1.nome,
-                    character: lastRoom.player1.character,
+					character: lastRoom.player1.character,
+					anim: lastRoom.player1.anim,
                     x: lastRoom.player1.x,
                     y: lastRoom.player1.y,
                     life: lastRoom.player1.life
@@ -64,6 +66,7 @@ io.on("connection", function (socket) {
 					id: lastRoom.player2.id,
 					nome: lastRoom.player2.nome,
 					character: lastRoom.player2.character,
+					anim: lastRoom.player2.anim,
                     x: lastRoom.player2.x,
                     y: lastRoom.player2.y,
                     life: lastRoom.player2.life
@@ -106,9 +109,49 @@ io.on("connection", function (socket) {
 		if (room.player1 === info) {
 			// Informação está vindo do player1, então deve ser encaminhada para o 2
 			room.player2.emit("player_data", player_data);
-		} else {
+		} 
+
+		else {
 			room.player1.emit("player_data", player_data);
 		}
+	});
+
+	socket.on("key_press", (anim, coor) => {
+		let info = player_info[socket.id];
+		let room = info.room;
+
+		if (room.player1 === info) {
+			room.player1.x = coor.x;
+			room.player1.y = coor.y;
+			room.player1.animation = anim;
+
+			let moveData = {
+				x: room.player1.x,
+				y: room.player1.y,
+				life: room.player1.life,
+				anim: room.player1.animation
+			}
+
+			socket.broadcast.emit("move", moveData);
+			
+		} 
+
+		else {
+			room.player2.x = coor.x;
+			room.player2.y = coor.y;
+			room.player1.animation = anim;
+
+			let moveData = {
+				x: room.player2.x,
+				y: room.player2.y,
+				life: room.player2.life,
+				anim : room.player1.animation
+			}
+
+			socket.broadcast.emit("move", moveData);
+
+		}
+
 	});
 
 	// Event for when a player disconnects

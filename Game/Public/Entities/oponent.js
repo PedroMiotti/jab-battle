@@ -2,11 +2,11 @@
 
 class Oponent extends Phaser.Physics.Arcade.Sprite {
  
-    constructor(scene, id, x, y, character, life){
+    constructor(scene, id, character, x, y, life){
         super(scene,'Oponent')
 
         this.id = id
-        this.spawn = {
+        this.coor = {
             x: x, 
             y: y
         }
@@ -16,36 +16,50 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         }
         this.life = life
 
+        this.fighter2 = null;
+        this.prefix = null;
+        this.animToPlay = null;
 
-        this.handleCharacterChoosing(scene ,character ,this.spawn.x, this.spawn.y)
+        this.handleCharacterChoosing(scene, character ,this.coor.x, this.coor.y)
+        
+    }
+
+    
+
+    handleCharacterChoosing(scene2, character, x , y){
+        // Adding Characters
+        let char_2 = remotePlayer.character;
+
+        if(char_2 === "Tommy"){          
+            this.fighter2 = this.scene.physics.add.existing(new Tommy(scene2, x, y))
+            this.prefix = "_tommy";
+
+        }
+        else if(char_2 === "Jax"){
+            this.fighter2 = this.scene.physics.add.existing(new Jax(scene2, x, y))
+            this.prefix = "_jax";
+
+        }
+        
+        
+        // TODO add all other character HERE
+
+        this.scene.physics.add.collider(this.fighter2) 
+        this.scene.physics.world.enableBody(this.fighter2)
+        this.fighter2.setCollideWorldBounds(true)
+        
+        if(!localPlayerIs2){
+            this.fighter2.flipX = true;
+        }
 
     }
 
-    handleCharacterChoosing(scene, character, x , y){
-        // Adding Characters
-        this.chosenChar = character 
-        this.fighter = null
+    onMoveOpponent(x, y, anim){
+        this.fighter2.x = x;
+        this.fighter2.y = y;
+
+        this.animToPlay = anim + this.prefix;
+        this.fighter2.anims.play(this.animToPlay, true);
         
-        if(this.chosenChar == 'Tommy'){          
-            this.fighter = this.scene.physics.add.existing(new Tommy(scene, x, y))
-        }
-        else if(this.chosenChar == 'Jax'){
-            this.fighter = this.scene.physics.add.existing(new Jax(scene, x, y))
-        }
-
-        // TODO add all other character HERE
-
-        
-        this.scene.physics.add.collider(this.fighter) 
-        this.scene.physics.world.enableBody(this.fighter)
-        this.fighter.setCollideWorldBounds(true)
-
-        if(!localPlayerIs2){
-            this.fighter.flipX = true;
-        }
-        
-  
-
-       
     }
 }

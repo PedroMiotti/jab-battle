@@ -10,7 +10,7 @@ const config = {
 	physics: {
 		default: "arcade",
 		arcade: {
-			debug: false,
+			debug: true,
 			gravity: { y: 0 }
 		}
 	},
@@ -23,6 +23,8 @@ const game = new Phaser.Game(config);
 // Global Variables
 let player = null; // Entitie
 let oponent = null; // Entitie
+
+let moved = false;
 
 let pID = null; // Player ID
 
@@ -72,8 +74,16 @@ function prepareSocket(nomePlayer, chosenChar) {
 			localPlayerIs2 = true;
 			localPlayer = gameStartData.player2;
 			remotePlayer = gameStartData.player1;
+			
 		}
+		
 		gameStartedCallback();
+	});
+
+	socket.on("move", (data) => {
+		moved = true;
+		onMoveCallback(data.x, data.y, data.anim)
+		
 	});
 
 	socket.on("game_ended", (gameEndData) => {
@@ -109,4 +119,12 @@ function gameEndedCallback(gameEndData) {
 }
 
 function gameErrorCallback() {
+}
+
+function onMoveCallback(x, y, anim){
+
+	remotePlayer.x = x;
+	remotePlayer.y = y;
+	remotePlayer.anim = anim
+
 }
