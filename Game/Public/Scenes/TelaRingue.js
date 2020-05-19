@@ -40,9 +40,15 @@ class TelaRingue extends Phaser.Scene {
 			this.add.text(470, 20, "60").setFontSize(80).setFontFamily('impact' )
 
 			
+		this.physics.world.enableBody([fighter, fighter2]);
+		
 
-
+		this.life = 100;
+		
+		
 		this.initPlayers();
+
+		this.physics.world.addCollider(fighter, fighter2, this.colliderCallback)
 
 	}
 
@@ -57,7 +63,9 @@ class TelaRingue extends Phaser.Scene {
 			
 		}
 
-		this.physics.world.collide(fighter, fighter2, this.colliderCallback);
+		// this.physics.add.collider(fighter, fighter2, this.colliderCallback);
+
+		
 	}
 
 	initPlayers() {
@@ -83,6 +91,21 @@ class TelaRingue extends Phaser.Scene {
 
 
 	colliderCallback(){
-		console.log("Colliding")
+		if(attack){
+			this.life = this.life - 10;
+			console.log(this.life);
+			
+
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+

@@ -35,7 +35,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
 			fighter.setVelocityX(-160);
 
-			socket.emit("key_press", "walk", { x: fighter.x, y: fighter.y });
+			socket.emit("key_press", "walk", {x: fighter.body.x, y: fighter.body.y});
 
 		} 
 		
@@ -45,34 +45,36 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
 			fighter.setVelocityX(160);
 
-			socket.emit("key_press", "walk", { x: fighter.x, y: fighter.y });
+			socket.emit("key_press", "walk", { x: fighter.body.x, y: fighter.body.y});
 
 		} 
-		else if(this.keys.jab.isDown){
+		else if(this.keys.jab.isDown && this.keys.right.isUp && this.keys.left.isUp){
+			attack = true;
 		    this.animToPlay = "jab" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 
-			socket.emit("key_press", "jab", { x: fighter.x, y: fighter.y });
+			socket.emit("key_press", "jab", { x: fighter.body.x, y: fighter.body.y });
 
 		    //TODO ----- Play PUNCH sfx
 
 		}
-		else if(this.keys.direto.isDown){
-
+		else if(this.keys.direto.isDown && this.keys.right.isUp && this.keys.left.isUp){
+			attack = true;
 		    this.animToPlay = "direto" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 
-			socket.emit("key_press", "direto", { x: fighter.x, y: fighter.y });
+			socket.emit("key_press", "direto", { x: fighter.body.x, y: fighter.body.y});
 
 		    //TODO ----- Play PUNCH sfx
 		}
 		
 		else {
+			attack = false;
 			this.animToPlay = "idle" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 			fighter.setVelocityX(0);
 			
-			socket.emit("key_press", "idle", { x: fighter.x, y: fighter.y });
+			socket.emit("key_press", "idle", { x: fighter.body.x, y: fighter.body.y });
 
 
 		}
@@ -95,7 +97,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		// TODO add all other character HERE
 
 		// this.scene.physics.add.collider(this.fighter);
-		this.scene.physics.world.enable(fighter);
+		// this.scene.physics.world.enableBody(fighter);
 		fighter.setCollideWorldBounds(true);
 		
 		

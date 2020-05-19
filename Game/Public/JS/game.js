@@ -14,6 +14,7 @@ const config = {
 			gravity: { y: 0 }
 		}
 	},
+	audio: { noAudio: true }, 
 	scene: [Boot, TelaInicial, TelaNome, TelaChooseChar, TelaRingue, TelaEncJogador]
 };
 
@@ -27,7 +28,8 @@ let oponent = null; // Entitie
 let fighter = null // Player's Physics Body
 let fighter2 = null // Opponent's Physics Body
 
-let moved = false; 
+let moved = false; // If player moved
+let attack = false; // If player is attacking
 
 let pID = null; // Player ID
 

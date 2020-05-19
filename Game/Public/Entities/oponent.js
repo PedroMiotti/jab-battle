@@ -45,8 +45,9 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
         // TODO add all other character HERE
 
         // this.scene.physics.add.collider(this.fighter2) 
-        this.scene.physics.world.enableBody(fighter2)
+        // this.scene.physics.world.enableBody(fighter2)
         fighter2.setCollideWorldBounds(true)
+
         
         if(!localPlayerIs2){
             fighter2.flipX = true;
@@ -55,8 +56,8 @@ class Oponent extends Phaser.Physics.Arcade.Sprite {
     }
 
     onMoveOpponent(x, y, anim){
-        fighter2.x = x;
-        fighter2.y = y;
+        fighter2.body.x = x;
+        fighter2.body.y = y;
 
         this.animToPlay = anim + this.prefix;
         fighter2.anims.play(this.animToPlay, true);
