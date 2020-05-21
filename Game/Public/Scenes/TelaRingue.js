@@ -10,6 +10,8 @@ class TelaRingue extends Phaser.Scene {
 		this.background = this.add.image(0, 0, "telaringueBG");
 		this.background.setOrigin(0, 0);
 
+		this.timerOver = false;
+
 
 		// HUD 
 			//Lifebar Frame
@@ -59,10 +61,13 @@ class TelaRingue extends Phaser.Scene {
 			this.add.text(918, 90, this.opponentName).setFontSize(25).setFontFamily('impact' ).setOrigin(1, 0);
 
 			// Timer
-			this.add.text(485, 24, "60").setFontSize(55).setFontFamily('impact').setColor("#000000");
+			this.timerText = this.add.text(485, 24, "60").setFontSize(55).setFontFamily('impact').setColor("#000000");
 		
 
 		this.initPlayers();
+
+		// Timer
+		this.timer = this.time.delayedCall(60000);
 
 
 	}
@@ -94,7 +99,15 @@ class TelaRingue extends Phaser.Scene {
 			p2Bar.setScale(remotePlayer.life / 100 , 1);
 		}
 
-		this.checkPlayerDead();
+		// Timer
+		if (this.timerOver === false){
+			this.showTimer();
+		}
+		else {
+			this.timerEnded(); // Callback for whent the timer ends!!
+		}
+
+		this.checkWhoWon();
 	}
 
 	initPlayers() {
@@ -131,34 +144,86 @@ class TelaRingue extends Phaser.Scene {
 
 	}
 
-
-	checkPlayerDead(){
+	// Ver quem ganhou
+	checkWhoWon(){
 		if(localPlayer.life === 0){
-			this.add.image(500, 180, 'youLose');
-			// Botao voltar
-			this.botaoVoltar = this.add
-			.image(512, 665, "botaoReiniciar")
-			.setInteractive()
-			.on("pointerdown", () => {
-				location.reload()
-			});
-
+			
+			this.lose()
 			
 		}
 		else if (remotePlayer.life === 0){
-			this.add.image(500, 170, 'youWin');
-			// Botao voltar
-			this.botaoVoltar = this.add
-			.image(512, 665, "botaoReiniciar")
-			.setInteractive()
-			.on("pointerdown", () => {
-				location.reload()
-			});
-
+			
+			this.win()
 			
 		}
 	}
 
+	// Callback para quando o timer acabar
+	timerEnded(){
+		if(localPlayer.life > remotePlayer.life){
+
+			this.win()
+
+		}
+		else if(localPlayer.life < remotePlayer.life){
+			this.lose()
+		}
+		else{
+			console.log("Draw")
+		}
+		
+
+	}
+
+	// Atualizar o texto do timer na tela
+	showTimer(){
+		let maxTime = 60;
+		let time = Math.floor(this.timer.getElapsedSeconds() );
+		let timeLeft = maxTime - time;
+		
+	
+		// Quando o countdown is over
+		if (timeLeft <= 0) {
+			timeLeft = 0;
+			this.timerOver = true;
+		}
+	
+		let sec = timeLeft % 60;
+
+		this.timerText.setText(sec);
+	}
+
+	// Mostrar para o jogador que perdeu
+	lose(){
+		this.add.image(500, 180, 'youLose');
+
+		p1Bar.destroy()
+		p2Bar.destroy()
+
+		// Botao voltar
+		this.botaoVoltar = this.add.image(512, 665, "botaoReiniciar")
+		.setInteractive()
+		.on("pointerdown", () => {
+			location.reload()
+		});
+	}
+
+	// Mostrar para o jogador que ganhou
+	win(){
+		this.add.image(500, 170, 'youWin');
+
+		p1Bar.destroy()
+		p2Bar.destroy()
+
+		// Botao voltar
+		this.botaoVoltar = this.add.image(512, 665, "botaoReiniciar")
+		.setInteractive()
+		.on("pointerdown", () => {
+			location.reload()
+		});
+
+	}
+	
 
 }
 

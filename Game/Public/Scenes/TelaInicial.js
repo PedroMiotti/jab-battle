@@ -16,6 +16,7 @@ class TelaInicial extends Phaser.Scene {
 			.setInteractive()
 			.on("pointerdown", () => {
 				this.scene.start("telaNome");
+				
 			});
 
 		// Config Botao
