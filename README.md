@@ -28,3 +28,6 @@ Para rodar o jogo em sua maquina :
 
 - Rode o servidor 
 > $ node server.js
+
+
+- Vá até seu navegador e digite 'localhost:2000'
