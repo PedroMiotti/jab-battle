@@ -79,7 +79,7 @@ class Player extends Phaser.GameObjects.Container {
 		}
 		
 		else {
-			attack = false;
+			
 			this.animToPlay = "idle" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 

@@ -171,12 +171,9 @@ class TelaRingue extends Phaser.Scene {
 
 
 
-<<<<<<< HEAD
-=======
 
 
 
 
 
 
->>>>>>> test
