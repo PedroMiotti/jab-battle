@@ -116,6 +116,7 @@ io.on("connection", function (socket) {
 		}
 	});
 
+	// Event for when the player moves
 	socket.on("key_press", (anim, coor) => {
 		let info = player_info[socket.id];
 		let room = info.room;
@@ -128,7 +129,6 @@ io.on("connection", function (socket) {
 			let moveData = {
 				x: room.player1.x,
 				y: room.player1.y,
-				life: room.player1.life,
 				anim: room.player1.animation
 			}
 
@@ -144,7 +144,6 @@ io.on("connection", function (socket) {
 			let moveData = {
 				x: room.player2.x,
 				y: room.player2.y,
-				life: room.player2.life,
 				anim : room.player1.animation
 			}
 
@@ -153,6 +152,36 @@ io.on("connection", function (socket) {
 		}
 
 	});
+
+	// Event for when the player attacks
+	socket.on('key_attack', (life) => {
+		let info = player_info[socket.id];
+		let room = info.room;
+
+		if (room.player1 === info) {
+			room.player1.life = life;
+			
+
+			let lifeData = {
+				life: room.player1.life,
+			}
+
+			socket.broadcast.emit("attack", lifeData);
+
+		} 
+
+		else {
+			room.player2.life = life;
+			
+
+			let lifeData = {
+				life: room.player2.life,
+			}
+			socket.broadcast.emit("attack", lifeData);
+
+		}
+	})
+
 
 	// Event for when a player disconnects
 	socket.on("disconnect", function () {
@@ -188,7 +217,7 @@ io.on("connection", function (socket) {
 // PORT CONFIG
 const PORT = process.env.PORT || 2000;
 
-// server.listen(2000, '192.168.0.107');
+
 server.listen(PORT, () => {
 	console.log(`Servidor OK \n Port : ${PORT}`);
 });

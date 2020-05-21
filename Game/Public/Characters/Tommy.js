@@ -1,6 +1,6 @@
 "use strict";
 
-class Tommy extends Phaser.Physics.Arcade.Sprite{
+class Tommy extends Phaser.GameObjects.Sprite{
 
     constructor(scene, x, y){
 

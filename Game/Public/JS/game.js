@@ -1,7 +1,6 @@
 "use strict";
 
 // CONFIG OBJECT FOR PHASER
-
 const config = {
 	type: Phaser.AUTO,
 	parent: "phaser-example",
@@ -10,12 +9,13 @@ const config = {
 	physics: {
 		default: "arcade",
 		arcade: {
-			debug: true,
-			gravity: { y: 0 }
+			debug: false,
+			gravity: {
+				 y: 0 
+			}
 		}
 	},
-	audio: { noAudio: true }, 
-	scene: [Boot, TelaInicial, TelaNome, TelaChooseChar, TelaRingue, TelaEncJogador]
+	scene: [Boot, TelaInicial, TelaNome, TelaChooseChar, TelaRingue]
 };
 
 // Phaser Instance
@@ -23,20 +23,29 @@ const game = new Phaser.Game(config);
 
 // Global Variables
 let player = null; // Entitie
-let oponent = null; // Entitie
+let opponent = null; // Entitie
 
-let fighter = null // Player's Physics Body
-let fighter2 = null // Opponent's Physics Body
+let fighter = null; // Player's Physics Body
+let fighter2 = null; // Opponent's Physics Body
 
-let moved = false; // If player moved
-let attack = false; // If player is attacking
+let playerContainer = null; // Player Container
+let opponentContainer = null; // Opponent Container
+
+let gloves = null; // Left Glove
+let gloves2 = null; // Right Glove
+
+let p1Bar; // Player 1 HeathBar
+let p2Bar; // Player 2 HeathBar
+
+let punching = false; // If ['w', 's'] were pressed
+let moved = false; // If ['a','d'] were pressed
 
 let pID = null; // Player ID
 
 let roomId = 0;
-let localPlayer = null;
-let remotePlayer = null;
-let localPlayerIs2 = false;
+let localPlayer = null; // LocalPlayer info
+let remotePlayer = null; // RemotePlayer info
+let localPlayerIs2 = false; // If player is player2 
 
 let socket = null;
 
@@ -91,6 +100,10 @@ function prepareSocket(nomePlayer, chosenChar) {
 		
 	});
 
+	socket.on("attack", (data) => {
+		onAttackCallback(data.life);
+	})
+
 	socket.on("game_ended", (gameEndData) => {
 		if (started) {
 			started = false;
@@ -124,6 +137,7 @@ function gameEndedCallback(gameEndData) {
 }
 
 function gameErrorCallback() {
+
 }
 
 function onMoveCallback(x, y, anim){
@@ -133,3 +147,13 @@ function onMoveCallback(x, y, anim){
 	remotePlayer.anim = anim
 
 }
+
+function onAttackCallback(life){
+
+	localPlayer.life = life;
+
+}
+
+
+
+

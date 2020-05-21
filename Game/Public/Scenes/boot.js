@@ -140,11 +140,16 @@ class Boot extends Phaser.Scene {
             // Background 
             this.load.image('telaringueBG', 'Assets/img/TelaRingue.png')
 
+            // Botao Reiniciar
+            this.load.image('botaoReiniciar', 'Assets/UI/botaoReiniciar.png')
+
             // HUD
                 // LifeBar
-                this.load.image('lifeframe', 'Assets/UI/lifebarFinal2.png' )
-                // LifeBar FlipedX
-                this.load.image('lifeframe2', 'Assets/UI/lifebar2.png' )
+                this.load.image("lifebarFrame", 'Assets/UI/LifeBarFrame.png')
+                // P1 Bar
+                this.load.image("p1Bar", 'Assets/UI/P1_FullBar.png')
+                // P2 Bar
+                this.load.image("p2Bar", 'Assets/UI/P2_FullBar.png')
 
             // Sprites
                 // Tommy
@@ -152,8 +157,12 @@ class Boot extends Phaser.Scene {
                 // Jax
                 this.load.atlas("Jax", "Assets/Sprites/Spritesheet/JaxSprite.png", 'Assets/Sprites/JSON/Jax.json')
 
-            // Luvas
-                this.add.sprite("luvaTommy", "Assets/Sprites/Luvas/luvasTommy.png")
+            // You Win
+            this.load.image('youWin' , 'Assets/img/YouWin.png')
+
+            // You Lose
+            this.load.image('youLose' , 'Assets/img/YouLose.png')
+
         
 
         
