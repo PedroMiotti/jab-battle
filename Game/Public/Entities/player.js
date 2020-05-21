@@ -1,6 +1,6 @@
 "use strict";
 
-class Player extends Phaser.Physics.Arcade.Sprite {
+class Player extends Phaser.GameObjects.Container {
 	constructor(scene, id, character, x, y, life) {
 		super(scene, "Player");
 
@@ -33,9 +33,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 			this.animToPlay = "walk" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 
-			fighter.setVelocityX(-160);
+			punching = false;
 
-			socket.emit("key_press", "walk", { x: fighter.x, y: fighter.y });
+			playerContainer.body.setVelocityX(-160);
+
+			socket.emit("key_press", "walk", { x: playerContainer.x, y: playerContainer.y });
 
 		} 
 		
@@ -43,26 +45,35 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 			this.animToPlay = "walk" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 
-			fighter.setVelocityX(160);
+			punching = false;
 
-			socket.emit("key_press", "walk", { x: fighter.x, y: fighter.y });
+			playerContainer.body.setVelocityX(160);
+
+			socket.emit("key_press", "walk", { x: playerContainer.x, y: playerContainer.y });
 
 		} 
-		else if(this.keys.jab.isDown){
+		else if(Phaser.Input.Keyboard.JustDown(this.keys.jab)){
 		    this.animToPlay = "jab" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 
-			socket.emit("key_press", "jab", { x: fighter.x, y: fighter.y });
+			punching = true;
+			
+			// Glove square go forwad
+			(localPlayerIs2 ? gloves.x = -105 : gloves.x = 105);
 
+			socket.emit("key_press", "jab", { x: playerContainer.x, y: playerContainer.y });
+			
 		    //TODO ----- Play PUNCH sfx
 
 		}
-		else if(this.keys.direto.isDown){
+		else if(Phaser.Input.Keyboard.JustDown(this.keys.direto)){
 
 		    this.animToPlay = "direto" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
 
-			socket.emit("key_press", "direto", { x: fighter.x, y: fighter.y });
+			punching = true;
+
+			socket.emit("key_press", "direto", { x: playerContainer.x, y: playerContainer.y });
 
 		    //TODO ----- Play PUNCH sfx
 		}
@@ -70,13 +81,16 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		else {
 			this.animToPlay = "idle" + this.prefix;
 			fighter.anims.play(this.animToPlay, true);
-			fighter.setVelocityX(0);
-			
-			socket.emit("key_press", "idle", { x: fighter.x, y: fighter.y });
 
+			playerContainer.body.setVelocityX(0);
 
+			punching = false;
+
+			// Glove square resets X axis
+			(localPlayerIs2 ? gloves.x = -60 : gloves.x = 60);
+
+			socket.emit("key_press", "idle", { x: playerContainer.x, y: playerContainer.y });
 		}
-
 	}
 
 	handleCharacterChoosing(scene1, character, x, y) {
@@ -84,30 +98,38 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 		let char_1 = localPlayer.character;
 
 		if (char_1 === "Tommy") {
-			fighter = this.scene.physics.add.existing(new Tommy(scene1, x, y));
+			fighter = this.scene.add.existing(new Tommy(scene1, 0, 0));
 			this.prefix = "_tommy";
 		} 
 		else if (char_1 === "Jax") {
-			fighter = this.scene.physics.add.existing(new Jax(scene1, x, y));
+			fighter = this.scene.add.existing(new Jax(scene1, 0, 0));
 			this.prefix = "_jax";
 		}
 		
 		// TODO add all other character HERE
 
-		// this.scene.physics.add.collider(this.fighter);
+
+		// Crating a container for the gloves and the fighter
+		playerContainer = this.scene.add.container(localPlayer.x, localPlayer.y);
+		playerContainer.setSize(250, 250); 
+		this.scene.physics.world.enableBody(playerContainer);
+		playerContainer.body.setCollideWorldBounds(true);
+
+		// Adding the figher to the container
+		playerContainer.add(fighter);
 		this.scene.physics.world.enable(fighter);
-		fighter.setCollideWorldBounds(true);
-		
+
+		//  Gloves Physics 
+		//* For the player2 x = -60
+		(localPlayerIs2 ? gloves = this.scene.add.rectangle(-60, 60 , 50, 50, "#ffff") : gloves = this.scene.add.rectangle(60, 70 , 50, 50, "#ffff"));
+		this.scene.physics.world.enable(gloves); 
+		gloves.setAlpha(0);
+		playerContainer.add(gloves); // Adding to the container
+
 		
 		if(localPlayerIs2){
             fighter.flipX = true;
         }
-	}
-
-	setupBody(scene){
-
-		return
-
 	}
 
 }

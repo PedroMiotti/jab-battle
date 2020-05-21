@@ -62,20 +62,30 @@ class TelaChooseChar extends Phaser.Scene {
 				this.selectedChar = this.add.image(520, 548, "SpidinhoIMG");
 			});
 
-		// Botao voltar
-		this.botaoVoltar = this.add
-			.image(94, 665, "botaoVoltarBig")
-			.setInteractive()
-			.on("pointerdown", () => {
-				this.scene.start("telaNome");
-			});
+
 
 		// Fight Button
+		this.clicked = false;
 		this.FightBotao = this.add
 			.image(923, 665, "FightButtonBig")
 			.setInteractive()
 			.on("pointerdown", () => {
-                prepareSocket(this.nomePlayer, this.chosenChar);
+				this.clicked = true;
+				this.FightBotao.disableInteractive();
+				prepareSocket(this.nomePlayer, this.chosenChar);
+				
 			});
+
 	}
+
+	update(){
+		if(this.clicked){
+			this.FightBotao.angle += 1;
+		}
+	}
+
+
+
+
+
 }

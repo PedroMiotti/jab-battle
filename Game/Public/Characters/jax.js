@@ -1,6 +1,6 @@
 "use strict";
 
-class Jax extends Phaser.Physics.Arcade.Sprite{
+class Jax extends Phaser.GameObjects.Sprite{
 
     constructor(scene, x, y){
 
