@@ -93,33 +93,14 @@ io.on("connection", function (socket) {
 		}
 	});
 
-	socket.on("player_data", (player_data) => {
-		let info = player_info[socket.id];
-		if (!info) {
-			console.log("!info");
-			return;
-		}
-
-        let room = info.room;
-		if (!room) {
-			console.log("!info.room");
-			return;
-		}
-
-		if (room.player1 === info) {
-			// Informação está vindo do player1, então deve ser encaminhada para o 2
-			room.player2.emit("player_data", player_data);
-		} 
-
-		else {
-			room.player1.emit("player_data", player_data);
-		}
-	});
-
 	// Event for when the player moves
 	socket.on("key_press", (anim, coor) => {
 		let info = player_info[socket.id];
 		let room = info.room;
+
+		if(!room){
+			console.log('Aqui')
+		}
 
 		if (room.player1 === info) {
 			room.player1.x = coor.x;
@@ -203,16 +184,24 @@ io.on("connection", function (socket) {
 			if (room.player1 && room.player1 !== info) {
 				// o player saindo era o player2
 				// avisa room.player1 que acabou o jogo!
+
+				socket.broadcast.emit("disconnect", 'O jogador 2 se desconectou !')
 				// TODO - create an event to display something at the screen when a player leaves
 			} else if (room.player2 && room.player2 !== info) {
 				// o player saindo era o player1
 				// avisa room.player2 que acabou o jogo!
+				socket.broadcast.emit("disconnect", 'O jogador 1 se desconectou !')
+
 			}
 			room.player1 = null; //  garbage collector!
 			room.player2 = null; //  garbage collector!
+
+
 		}
 	});
 });
+
+
 
 // PORT CONFIG
 const PORT = process.env.PORT || 2000;

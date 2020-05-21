@@ -111,8 +111,6 @@ function prepareSocket(nomePlayer, chosenChar) {
 		}
 	});
 
-	socket.on("player_data", remoteDataCallback);
-
 	socket.on("connect", function () {
 		socket.emit("info_player", nomePlayer, chosenChar);
 	});
@@ -121,7 +119,9 @@ function prepareSocket(nomePlayer, chosenChar) {
 		if (started) {
 			started = false;
 			gameErrorCallback();
+			socket.removeAllListeners(['attack', 'move'])
 		}
+
 		socket = null;
 	});
 }
@@ -130,13 +130,11 @@ function gameStartedCallback() {
   game.scene.start("telaRingue");
 }
 
-function remoteDataCallback(player_data) {
-}
-
 function gameEndedCallback(gameEndData) {
 }
 
 function gameErrorCallback() {
+	location.reload();
 
 }
 
