@@ -14,8 +14,8 @@
     "socket.io": "^2.3.0"
   },
   "engines": {
-    "node": "0.10.11",
-    "npm": "1.2.25"
+    "node": "12.14.1",
+    "npm": "6.13.4"
   },
   "devDependencies": {}
 }
