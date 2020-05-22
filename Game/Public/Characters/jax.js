@@ -28,7 +28,7 @@ class Jax extends Phaser.GameObjects.Sprite{
         //JAB
         this.scene.anims.create({
             key: "jab_jax",
-            frameRate: 1,
+            frameRate: 4,
             frames: this.scene.anims.generateFrameNames('Jax', {
                 prefix: 'SpriteSheetJax_',
                 suffix: ".png",
@@ -42,7 +42,7 @@ class Jax extends Phaser.GameObjects.Sprite{
         // DIRETO
         this.scene.anims.create({
             key: "direto_jax",           
-            frameRate: 1,
+            frameRate: 4,
             frames: this.scene.anims.generateFrameNames('Jax', {
                 prefix: 'SpriteSheetJax_',
                 suffix: ".png",
