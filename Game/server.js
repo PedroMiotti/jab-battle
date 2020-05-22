@@ -96,40 +96,51 @@ io.on("connection", function (socket) {
 	// Event for when the player moves
 	socket.on("key_press", (anim, coor) => {
 		let info = player_info[socket.id];
-		let room = info.room;
 
-		if(!room){
-			console.log('Aqui')
+		if(!info){
+			return;
 		}
 
+		let room = info.room;
+
+		
 		if (room.player1 === info) {
-			room.player1.x = coor.x;
-			room.player1.y = coor.y;
-			room.player1.animation = anim;
+			if(room.player1){
+				room.player1.x = coor.x;
+				room.player1.y = coor.y;
+				room.player1.animation = anim;
 
-			let moveData = {
-				x: room.player1.x,
-				y: room.player1.y,
-				anim: room.player1.animation
+				let moveData = {
+					x: room.player1.x,
+					y: room.player1.y,
+					anim: room.player1.animation
+				}
+
+				socket.to(room).emit("move", moveData);
+				info.room.player2.socket.emit("move", moveData);
 			}
-
-			socket.broadcast.emit("move", moveData);
-			
+			else{
+				socket.emit('disconnect');
+			}
 		} 
-
+		
 		else {
-			room.player2.x = coor.x;
-			room.player2.y = coor.y;
-			room.player1.animation = anim;
+			if(room.player2){
+				room.player2.x = coor.x;
+				room.player2.y = coor.y;
+				room.player1.animation = anim;
 
-			let moveData = {
-				x: room.player2.x,
-				y: room.player2.y,
-				anim : room.player1.animation
+				let moveData = {
+					x: room.player2.x,
+					y: room.player2.y,
+					anim : room.player1.animation
+				}
+
+				info.room.player1.socket.emit("move", moveData);
 			}
-
-			socket.broadcast.emit("move", moveData);
-
+			else{
+				socket.emit('disconnect');
+			}
 		}
 
 	});
@@ -147,7 +158,7 @@ io.on("connection", function (socket) {
 				life: room.player1.life,
 			}
 
-			socket.broadcast.emit("attack", lifeData);
+			info.room.player2.socket.emit("attack", lifeData);
 
 		} 
 
@@ -158,7 +169,8 @@ io.on("connection", function (socket) {
 			let lifeData = {
 				life: room.player2.life,
 			}
-			socket.broadcast.emit("attack", lifeData);
+			info.room.player1.socket.emit("attack", lifeData);
+
 
 		}
 	})
@@ -185,12 +197,12 @@ io.on("connection", function (socket) {
 				// o player saindo era o player2
 				// avisa room.player1 que acabou o jogo!
 
-				socket.broadcast.emit("disconnect", 'O jogador 2 se desconectou !')
+				socket.to(room).emit("disconnect", 'O jogador 2 se desconectou !')
 				// TODO - create an event to display something at the screen when a player leaves
 			} else if (room.player2 && room.player2 !== info) {
 				// o player saindo era o player1
 				// avisa room.player2 que acabou o jogo!
-				socket.broadcast.emit("disconnect", 'O jogador 1 se desconectou !')
+				socket.to(room).emit("disconnect", 'O jogador 1 se desconectou !')
 
 			}
 			room.player1 = null; //  garbage collector!

@@ -53,9 +53,9 @@ class Player extends Phaser.GameObjects.Container {
 
 		} 
 		else if(Phaser.Input.Keyboard.JustDown(this.keys.jab)){
-		    this.animToPlay = "jab" + this.prefix;
+			this.animToPlay = "jab" + this.prefix;
+			
 			fighter.anims.play(this.animToPlay, true);
-
 			punching = true;
 			
 			// Glove square go forwad

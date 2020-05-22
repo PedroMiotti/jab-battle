@@ -215,6 +215,8 @@ class TelaRingue extends Phaser.Scene {
 		p1Bar.destroy()
 		p2Bar.destroy()
 
+		opponent.angle = -90;
+
 		// Botao voltar
 		this.botaoVoltar = this.add.image(512, 665, "botaoReiniciar")
 		.setInteractive()
