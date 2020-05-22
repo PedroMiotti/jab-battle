@@ -2,6 +2,7 @@
 // Express
 const express = require(`express`);
 const app = express();
+var path = require('path');
 
 // Socket.io
 const server = require("http").Server(app);
@@ -9,7 +10,8 @@ const io = require("socket.io").listen(server);
 
 // CONFIG
 // MIDDLEWARES
-app.use(express.static(__dirname + "/Public")); // Using the Public folder as the static folder
+// app.use(express.static(__dirname + "/Public")); // Using the Public folder as the static folder
+app.use(express.static(path.join(__dirname, '/Public'), { maxAge: 86400000 }));
 
 // Socket.io
 
