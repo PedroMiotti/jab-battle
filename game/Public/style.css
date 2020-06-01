@@ -1,0 +1,23 @@
+
+#nameBox {
+    display: block;
+    position: absolute;
+    margin-left: 363px;
+    margin-top: 328px;
+    width: 283px;
+    height: 43px;
+    border: 0px solid #1C6EA4;
+    border-radius: 10px;
+    outline: none;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 25px;
+}
+
+
+@font-face {
+    font-family: impact;
+    src: url('Assets/fonts/impact.ttf');
+    font-weight: 400;
+    font-weight: normal;
+    color: black;
+  }
