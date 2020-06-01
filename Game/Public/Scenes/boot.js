@@ -67,13 +67,17 @@ class Boot extends Phaser.Scene {
             assetText.destroy();
         });
         
-        this.load.image('logo', 'Assets/UI/Logo.png');
         
-        for (let i = 0; i < 800; i++) {
-            this.load.image('logo'+i, 'Assets/UI/Logo.png');
-        }
-        // -------------
-            // Tela Inicial 
+        
+        for (let i = 0; i < 600; i++) {
+
+            this.load.image('logo', 'Assets/UI/Logo.png');
+            
+            // SFX
+            //Lobby
+            this.load.audio('lobby', 'Assets/sfx/Lobby.mp3');
+
+        // Tela Inicial 
 
             // Background
             this.load.image('telainicialBG', 'Assets/img/TelaInicial.png');
@@ -82,7 +86,7 @@ class Boot extends Phaser.Scene {
             // Botao Config
             this.load.image('configBotao', 'Assets/UI/ConfigBotao1.png');
 
-         // Tela Nome 
+        // Tela Nome 
 
             // Background
             this.load.image('telanomeBG', 'Assets/img/TelaNome.png');
@@ -98,6 +102,9 @@ class Boot extends Phaser.Scene {
 
             // Fight Button
             this.load.image('FightButtonBig', "Assets/UI/FightButtonBig.png" );
+
+            //Procurando Jogador Banner
+            this.load.image('procJogadorBanner', 'Assets/UI/BannerProcJog.png');
 
             // Botao Voltar
             this.load.image('botaoVoltarBig', 'Assets/UI/BackButtonBig.png');
@@ -152,6 +159,9 @@ class Boot extends Phaser.Scene {
             // You Lose
             this.load.image('youLose' , 'Assets/img/YouLose.png');
  
+            
+        }
+
     }
 
     create() {

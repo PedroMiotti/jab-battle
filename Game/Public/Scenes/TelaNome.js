@@ -14,11 +14,14 @@ class TelaNome extends Phaser.Scene {
 		this.textBox = document.getElementById("box");
 		this.textBox.innerHTML = '<input id="nameBox" type="text" placeholder="Nome"></input>';
 
+		
+
 		// Botao Voltar
 		this.botaoJogar = this.add
 			.image(395, 520, "botaoVoltar")
 			.setInteractive()
 			.on("pointerdown", () => {
+				
 				this.scene.start("telaInicial");
 			});
 

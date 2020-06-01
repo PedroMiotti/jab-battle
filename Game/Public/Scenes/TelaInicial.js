@@ -10,13 +10,16 @@ class TelaInicial extends Phaser.Scene {
 		this.background = this.add.image(0, 0, "telainicialBG");
 		this.background.setOrigin(0, 0);
 
+		// SFX
+		lobbysound = this.sound.add('lobby', {loop: true});
+		lobbysound.play()
+
 		// Botao Jogar
 		this.botaoJogar = this.add
 			.image(512, 699, "botaoJogar")
 			.setInteractive()
 			.on("pointerdown", () => {
 				this.scene.start("telaNome");
-				
 			});
 
 		// Config Botao

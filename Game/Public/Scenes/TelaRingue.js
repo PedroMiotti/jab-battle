@@ -6,6 +6,9 @@ class TelaRingue extends Phaser.Scene {
 	}
 
 	create() {
+		// Stop lobby sfx
+		lobbysound.stop()
+
 		// Setting Background
 		this.background = this.add.image(0, 0, "telaringueBG");
 		this.background.setOrigin(0, 0);

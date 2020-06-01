@@ -72,6 +72,7 @@ class TelaChooseChar extends Phaser.Scene {
 			.on("pointerdown", () => {
 				this.clicked = true;
 				this.FightBotao.disableInteractive();
+				this.addBanner();
 				prepareSocket(this.nomePlayer, this.chosenChar);
 				
 			});
@@ -82,6 +83,10 @@ class TelaChooseChar extends Phaser.Scene {
 		if(this.clicked){
 			this.FightBotao.angle += 1;
 		}
+	}
+
+	addBanner(){
+		this.add.image(939, 562, "procJogadorBanner");
 	}
 
 

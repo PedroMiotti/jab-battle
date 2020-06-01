@@ -40,6 +40,8 @@ let p2Bar; // Player 2 HeathBar
 let punching = false; // If ['w', 's'] were pressed
 let moved = false; // If ['a','d'] were pressed
 
+let lobbysound = null; // Lobby sfx
+
 let pID = null; // Player ID
 
 let roomId = 0;
@@ -127,7 +129,7 @@ function prepareSocket(nomePlayer, chosenChar) {
 }
 
 function gameStartedCallback() {
-  game.scene.start("telaRingue");
+  	game.scene.start("telaRingue");
 }
 
 function gameEndedCallback(gameEndData) {
