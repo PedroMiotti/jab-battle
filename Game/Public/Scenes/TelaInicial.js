@@ -11,7 +11,7 @@ class TelaInicial extends Phaser.Scene {
 		this.background.setOrigin(0, 0);
 
 		// SFX
-		lobbysound = this.sound.add('lobby', {loop: true});
+		lobbysound = this.sound.add('lobby', {loop: true, volume: 0.1});
 		lobbysound.play()
 
 		// Botao Jogar

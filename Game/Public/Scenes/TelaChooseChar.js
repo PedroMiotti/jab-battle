@@ -63,19 +63,27 @@ class TelaChooseChar extends Phaser.Scene {
 			});
 
 
-
 		// Fight Button
 		this.clicked = false;
 		this.FightBotao = this.add
 			.image(923, 665, "FightButtonBig")
 			.setInteractive()
 			.on("pointerdown", () => {
-				this.clicked = true;
 				this.FightBotao.disableInteractive();
-				this.addBanner();
+				this.banner = this.add.image(1204, 562, "procJogadorBanner");
+				this.tweens.add({
+					targets: this.banner,
+					x: 939,
+					ease: 'Power1',
+					duration: 1500,
+				});
+				this.clicked = true;
 				prepareSocket(this.nomePlayer, this.chosenChar);
 				
 			});
+
+
+		
 
 	}
 
@@ -84,13 +92,5 @@ class TelaChooseChar extends Phaser.Scene {
 			this.FightBotao.angle += 1;
 		}
 	}
-
-	addBanner(){
-		this.add.image(939, 562, "procJogadorBanner");
-	}
-
-
-
-
 
 }
