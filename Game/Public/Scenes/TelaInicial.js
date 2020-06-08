@@ -23,11 +23,31 @@ class TelaInicial extends Phaser.Scene {
 			});
 
 		// Config Botao
-		this.configBotao = this.add
-			.image(950, 70, "configBotao")
+		this.musicButton = this.add.image(950, 70, "music")
 			.setInteractive()
 			.on("pointerdown", () => {
-				console.log("Config");
+				this.musicButton.visible = false;
+				this.sound.mute = true;
+				
+
+				this.muteButton = this.add.image(950, 70, 'mute')
+					.setInteractive()
+					.on("pointerdown", () => {
+						this.muteButton.visible = false;
+						this.musicButton.visible = true;
+						this.sound.mute = false;
+
+					});
 			});
+
+		
+		
+			
 	}
 }
+
+
+
+
+
+

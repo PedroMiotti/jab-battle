@@ -129,7 +129,9 @@ function prepareSocket(nomePlayer, chosenChar) {
 }
 
 function gameStartedCallback() {
-  	game.scene.start("telaRingue");
+	game.scene.start("telaRingue");
+	let fight = game.sound.add('fight', {volume: 0.3});
+	fight.play();
 }
 
 function gameEndedCallback(gameEndData) {

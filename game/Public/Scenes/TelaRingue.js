@@ -155,7 +155,6 @@ class TelaRingue extends Phaser.Scene {
 			
 		}
 		else if (remotePlayer.life === 0){
-			
 			this.win()
 			
 		}

@@ -77,15 +77,20 @@ class Boot extends Phaser.Scene {
             //Lobby
             this.load.audio('lobby', 'Assets/sfx/Lobby.mp3');
 
+            // Fight
+            this.load.audio('fight', 'Assets/sfx/FIGHT.wav');
+
         // Tela Inicial 
 
             // Background
             this.load.image('telainicialBG', 'Assets/img/TelaInicial.png');
             // Botao Jogar
             this.load.image('botaoJogar', 'Assets/UI/BotaoJogar.png');
-            // Botao Config
-            this.load.image('configBotao', 'Assets/UI/ConfigBotao1.png');
-
+            // Music Config
+            this.load.image('music', 'Assets/UI/alto-falante.png');
+            // Mute 
+            this.load.image('mute', 'Assets/UI/mudo.png');
+            
         // Tela Nome 
 
             // Background

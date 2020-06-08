@@ -81,10 +81,6 @@ class TelaChooseChar extends Phaser.Scene {
 				prepareSocket(this.nomePlayer, this.chosenChar);
 				
 			});
-
-
-		
-
 	}
 
 	update(){
