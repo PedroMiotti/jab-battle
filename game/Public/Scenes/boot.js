@@ -125,7 +125,7 @@ class Boot extends Phaser.Scene {
 
                 // Rut
                 this.load.image('DigaraBtt', '/Assets/UI/ChooseCharBtt/RutBTT.png'); // Buttons
-                this.load.image('DigaraIMG', 'Assets/UI/ChooseCharIMG/DigaraIMG.png'); // IMG
+                this.load.image('DigaraIMG', 'Assets/UI/ChooseCharIMG/DigaraIMG2.png'); // IMG
 
                 // Cascao
                 this.load.image('CascaoBtt', '/Assets/UI/ChooseCharBtt/CascaoBTT.png'); // Buttons
@@ -157,6 +157,10 @@ class Boot extends Phaser.Scene {
                 this.load.atlas("Tommy", "Assets/Sprites/Spritesheet/TommySprite.png", 'Assets/Sprites/JSON/Tommy.json');
                 // Jax
                 this.load.atlas("Jax", "Assets/Sprites/Spritesheet/JaxSprite.png", 'Assets/Sprites/JSON/Jax.json');
+                // Cascao
+                this.load.atlas("cascao", "Assets/Sprites/Spritesheet/cascao.png", 'Assets/Sprites/JSON/cascao.json');
+                // Spidinho
+                this.load.atlas("spidinho", "Assets/Sprites/Spritesheet/spidinho.png", 'Assets/Sprites/JSON/spidinho.json');
 
             // You Win
             this.load.image('youWin' , 'Assets/img/YouWin.png');

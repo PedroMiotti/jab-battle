@@ -48,7 +48,7 @@ class TelaChooseChar extends Phaser.Scene {
 			.image(68, 461, "CascaoBtt")
 			.setInteractive()
 			.on("pointerdown", () => {
-				this.chosenChar = "Cascao";
+				this.chosenChar = "cascao";
 				this.selectedChar.destroy();
 				this.selectedChar = this.add.image(520, 532, "CascaoIMG");
 			});
@@ -57,7 +57,7 @@ class TelaChooseChar extends Phaser.Scene {
 			.image(160, 461, "SpidinhoBtt")
 			.setInteractive()
 			.on("pointerdown", () => {
-				this.chosenChar = "Spidinho";
+				this.chosenChar = "spidinho";
 				this.selectedChar.destroy();
 				this.selectedChar = this.add.image(520, 548, "SpidinhoIMG");
 			});

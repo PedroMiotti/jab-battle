@@ -33,16 +33,24 @@ class Oponent extends Phaser.GameObjects.Container {
         if(char_2 === "Tommy"){          
             fighter2 = this.scene.add.existing(new Tommy(scene2, 0, 0))
             this.prefix = "_tommy";
-
         }
         else if(char_2 === "Jax"){
             fighter2 = this.scene.add.existing(new Jax(scene2, 0, 0))
             this.prefix = "_jax";
-
         }
+        else if (char_2 === "Digara") {
+			fighter2 = this.scene.add.existing(new Digara(scene2, 0, 0));
+			this.prefix = "_digara";
+		}
+		else if (char_2 === "cascao") {
+			fighter2 = this.scene.add.existing(new Cascao(scene2, 0, 0));
+			this.prefix = "_cascao";
+		}
+		else if (char_2 === "spidinho") {
+			fighter2 = this.scene.add.existing(new Spidinho(scene2, 0, 0));
+			this.prefix = "_spidinho";
+		}
         
-        
-        // TODO add all other character HERE
 
         
         opponentContainer = this.scene.add.container(remotePlayer.x, remotePlayer.y);

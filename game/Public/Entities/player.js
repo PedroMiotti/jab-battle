@@ -106,8 +106,19 @@ class Player extends Phaser.GameObjects.Container {
 			fighter = this.scene.add.existing(new Jax(scene1, 0, 0));
 			this.prefix = "_jax";
 		}
+		else if (char_1 === "Digara") {
+			fighter = this.scene.add.existing(new Digara(scene1, 0, 0));
+			this.prefix = "_digara";
+		}
+		else if (char_1 === "cascao") {
+			fighter = this.scene.add.existing(new Cascao(scene1, 0, 0));
+			this.prefix = "_cascao";
+		}
+		else if (char_1 === "spidinho") {
+			fighter = this.scene.add.existing(new Spidinho(scene1, 0, 0));
+			this.prefix = "_spidinho";
+		}
 		
-		// TODO add all other character HERE
 
 
 		// Crating a container for the gloves and the fighter
