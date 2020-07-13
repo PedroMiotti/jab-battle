@@ -2,32 +2,8 @@
 
 ----
 
-Jogo criado para a aula de **Projetos Interdiciplinares 1** da faculdade ESPM com o professor Carlos Rafael, simples jogo de Boxe usando Phaser e NodeJS.
+Multiplayer Boxing game created with NodeJS and SockeIO for the back-end and Phaser 3 and HTML5 for the front-end.
+
+If you would like to test it out, here is the link --> jabbattle.herokuapp.com (It's only possible to play with two players).
 
 
-**Integrantes do grupo :**
-
-Pedro Miotti,
-Thiago Miotti Arribamar,
-Guilherme Frizo,
-Pedro Pastelar,
-Lucca Pascote,
-Rafael Ruthledge,
-
-
-Para rodar o jogo em sua maquina :
-
-- Clone o repositorio 
->$ git clone [link do repositorio]
-
-- Instale as dependencias 
->$ npm install
-
-- Entre na pasta 'Game'
->$ cd game
-
-- Rode o servidor 
-> $ node server.js
-
-
-- Vá até seu navegador e digite 'localhost:2000'
