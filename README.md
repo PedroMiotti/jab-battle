@@ -9,7 +9,7 @@ If you would like to test it out, here is the link --> [JabBattle](http://jabbat
 
 Main Screen : 
 
-[Main Screen](https://github.com/PedroMiotti/Jab_Battle/blob/master/Game/Public/Assets/img/readme/1.png)
+<img src="https://github.com/PedroMiotti/Jab_Battle/blob/master/Game/Public/Assets/img/readme/1.png" />
 
 
 
