@@ -1,0 +1,50 @@
+{
+"frames": {
+	"spidinho_01.png": {
+		"frame": {"x":294, "y":292, "w":257, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":257,"h":291},
+		"sourceSize": {"w":257,"h":291}
+	},
+	"spidinho_02.png": {
+		"frame": {"x":294, "y":0, "w":257, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":257,"h":291},
+		"sourceSize": {"w":257,"h":291}
+	},
+	"spidinho_03.png": {
+		"frame": {"x":552, "y":0, "w":257, "h":290},
+		"spriteSourceSize": {"x":0,"y":0,"w":257,"h":290},
+		"sourceSize": {"w":257,"h":290}
+	},
+	"spidinho_04.png": {
+		"frame": {"x":0, "y":584, "w":257, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":257,"h":291},
+		"sourceSize": {"w":257,"h":291}
+	},
+	"spidinho_05.png": {
+		"frame": {"x":258, "y":584, "w":257, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":257,"h":291},
+		"sourceSize": {"w":257,"h":291}
+	},
+	"spidinho_06.png": {
+		"frame": {"x":0, "y":0, "w":293, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":293,"h":291},
+		"sourceSize": {"w":293,"h":291}
+	},
+	"spidinho_07.png": {
+		"frame": {"x":516, "y":584, "w":257, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":257,"h":291},
+		"sourceSize": {"w":257,"h":291}
+	},
+	"spidinho_08.png": {
+		"frame": {"x":0, "y":292, "w":293, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":293,"h":291},
+		"sourceSize": {"w":293,"h":291}
+	}
+
+},
+"meta": {
+	"image": "spidinho.png",
+	"size": {"w": 810, "h": 876},
+	"scale": "1"
+}
+}

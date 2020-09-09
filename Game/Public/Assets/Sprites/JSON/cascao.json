@@ -1,0 +1,50 @@
+{
+"frames": {
+	"cascao_01.png": {
+		"frame": {"x":0, "y":0, "w":252, "h":288},
+		"spriteSourceSize": {"x":0,"y":0,"w":252,"h":288},
+		"sourceSize": {"w":252,"h":288}
+	},
+	"cascao_02.png": {
+		"frame": {"x":253, "y":0, "w":225, "h":288},
+		"spriteSourceSize": {"x":0,"y":0,"w":225,"h":288},
+		"sourceSize": {"w":225,"h":288}
+	},
+	"cascao_03.png": {
+		"frame": {"x":479, "y":0, "w":220, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":220,"h":291},
+		"sourceSize": {"w":220,"h":291}
+	},
+	"cascao_04.png": {
+		"frame": {"x":0, "y":289, "w":249, "h":288},
+		"spriteSourceSize": {"x":0,"y":0,"w":249,"h":288},
+		"sourceSize": {"w":249,"h":288}
+	},
+	"cascao_05.png": {
+		"frame": {"x":231, "y":578, "w":226, "h":288},
+		"spriteSourceSize": {"x":0,"y":0,"w":226,"h":288},
+		"sourceSize": {"w":226,"h":288}
+	},
+	"cascao_06.png": {
+		"frame": {"x":0, "y":578, "w":230, "h":291},
+		"spriteSourceSize": {"x":0,"y":0,"w":230,"h":291},
+		"sourceSize": {"w":230,"h":291}
+	},
+	"cascao_07.png": {
+		"frame": {"x":250, "y":289, "w":226, "h":288},
+		"spriteSourceSize": {"x":0,"y":0,"w":226,"h":288},
+		"sourceSize": {"w":226,"h":288}
+	},
+	"cascao_08.png": {
+		"frame": {"x":458, "y":578, "w":225, "h":290},
+		"spriteSourceSize": {"x":0,"y":0,"w":225,"h":290},
+		"sourceSize": {"w":225,"h":290}
+	}
+
+},
+"meta": {
+	"image": "cascao.png",
+	"size": {"w": 700, "h": 870},
+	"scale": "1"
+}
+}

@@ -1,33 +1,27 @@
 # Jab Battle
 
-----
 
-Jogo criado para a aula de **Projetos Interdiciplinares 1** da faculdade ESPM com o professor Carlos Rafael, simples jogo de Boxe usando Phaser e NodeJS.
+Multiplayer Boxing game created with NodeJS and SockeIO for the back-end and Phaser 3 and HTML5 for the front-end.
 
-
-**Integrantes do grupo :**
-
-Pedro Miotti,
-Thiago Miotti Arribamar,
-Guilherme Frizo,
-Pedro Pastelar,
-Lucca Pascote,
-Rafael Ruthledge,
+If you would like to test it out, here is the link --> [JabBattle](http://jabbattle.herokuapp.com/) (It's only possible to play with two players).
 
 
-Para rodar o jogo em sua maquina :
 
-- Clone o repositorio 
->$ git clone [link do repositorio]
+Main Screen : 
 
-- Instale as dependencias 
->$ npm install
-
-- Entre na pasta 'Game'
->$ cd game
-
-- Rode o servidor 
-> $ node server.js
+<img src="https://github.com/PedroMiotti/Jab_Battle/blob/master/Game/Public/Assets/img/readme/1.png" />
 
 
-- Vá até seu navegador e digite 'localhost:2000'
+Choose Character Screen : 
+
+<img src="https://github.com/PedroMiotti/Jab_Battle/blob/master/Game/Public/Assets/img/readme/2.png" />
+
+
+Fight Screen :
+
+<img src="https://github.com/PedroMiotti/Jab_Battle/blob/master/Game/Public/Assets/img/readme/3.png" />
+
+
+
+
+
